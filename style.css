@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Emoji:wght@300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pliant:ital,wght@0,100..900;1,100..900&display=swap');
 
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+
 :root {
-    --main-color: #72c5da;
+    --main-color: #034E79;
     --secondary-color: #ffffff;
 
     --text-color: #000000;
@@ -15,71 +16,56 @@ body, html {
     color: var(--text-color);
     font-family: var(--font-family);
 }
-emoji {
-    font-family: "Noto Emoji", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 500; /* 300-700 */
-    font-style: normal;
-}
 
 
 .navbar {
     & {
-        padding: 6px 12.5px;
+        padding: 6px 112.5px;
         background-color: var(--main-color);
 
         display: flex;
         align-items: center;
     }
-    .logo {
-        margin-right: 45px;
-    }
     
-    .searchbar {
-        margin-right: 70px;
-
-        --bg-color: #EDF2F2;
-
-        & {
-            border: none;
-            width: 250px;
-            background-color: var(--bg-color);
-        }
+    .logo {
+        margin-right: 40px;
     }
 
-    .btns {
-        btn {
-            --bg-color: #B6DBE8;
-            --text-color: #fff;
+    .searchbar {
+        --bg-color: #fff;
+        
+        & {
+            width: 20%;
 
-            --font-size: 10px;
+            display: flex;
+            background-color: var(--bg-color);
+            border-radius: 17.5px;
+            padding: 6.5px;
+        }
 
+        button {
             & {
-                border-radius: 5px;
-                padding: 7.5px;
-                background-color: var(--bg-color);
-                color: var(--text-color)
+                background: #dddddd00;
+                border: none;
+                cursor: pointer;
+            }
+            .fa {
             }
         }
+
+        input {
+            width: 100%;
+            background-color: var(--bg-color);
+            border: none;
+        }
+        input:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
     }
 }
 
-
 .logo {
-    --text-color: #fff;
-    --bold-color: #294E9C;
-
-    --font-family: "Lilita One", sans-serif;
-    --size-logo: 27px;
-
-    & {
-        font-family: var(--font-family);
-        font-size: var(--size-logo);
-        color: var(--text-color);
-    }
-
-    b {
-        font-size: calc( var(--size-logo) + 10px );
-        color: var(--bold-color)
-    }
+    height: 55px;
 }
