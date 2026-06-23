@@ -20,8 +20,13 @@ body, html {
 
 .navbar {
     & {
-        padding: 6px 112.5px;
+        padding: 6px 7.5%;
+        border-bottom: 2.5px solid #142B51;
         background-color: var(--main-color);
+
+        background-image: url('assets/imgs/ocean.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
 
         display: flex;
         align-items: center;
@@ -32,6 +37,8 @@ body, html {
     }
 
     .searchbar {
+        margin-right: 40px;
+
         --bg-color: #fff;
         
         & {
@@ -40,7 +47,7 @@ body, html {
             display: flex;
             background-color: var(--bg-color);
             border-radius: 17.5px;
-            padding: 6.5px;
+            padding: 7.5px;
         }
 
         button {
@@ -63,6 +70,163 @@ body, html {
             box-shadow: none;
         }
 
+    }
+
+    .btns {
+        
+        --bg-color: #fff;
+        --text-color: #000;
+
+        & {
+            margin-left: auto; 
+            margin-right: 0;
+
+            display: flex;
+            justify-content: flex-end;
+
+            gap: 15px;
+        }
+        
+        button {
+            & {
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                font-weight: 600;
+
+                border: none;
+                border-radius: 12.5px;
+                padding: 10px 12.5px;
+
+                cursor: pointer;
+
+                filter: invert(0);
+                transition: .25s ease; 
+            }
+            &:hover {
+                filter: invert(1);
+            }
+        }
+    }
+}
+
+.content {
+    & {
+        width: 100%;
+    }
+
+    .presentation {
+        --font-color: #fff;
+
+        & {
+            position: relative;
+        }
+
+        img {
+            width: 100%;
+        }
+        text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            color: var(--font-color);
+            font-size: 1.75rem;
+            text-shadow: 0 0 7px #000;
+        }
+    }
+}
+
+.footer {
+    & {
+        padding: 15px 150px;
+    }
+
+    hr {
+        background-color: #E3E3E3;
+        border: 0;
+        margin: 0;
+        width: 100%;
+        height: 1.3px;
+    }
+
+    .infopoint {
+        --font-size-tit: 1.2rem;
+        --font-size-el: 0.45rem;
+        --font-color: #5A6566;
+
+        padding: 30px 15px;
+        & {
+            color: var(--font-color);
+
+            display: flex;
+            justify-content: space-between;
+        }
+        .info {
+            & {
+                display: flex;
+                flex-direction: column;
+                row-gap: 7.5px;
+            }
+
+            iname {
+                font-size: var(--font-size-tit);
+                
+                margin-bottom: 10px;
+            }
+            a {
+                & {
+                    font-size: var(--font-size-el);
+
+                    all: unset;
+                    transition: .25s ease;
+                }
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    .socials {
+        padding: 30px 15px;
+        & {
+            display: flex;
+        }
+        i {
+            color: #BBBBBB;
+            font-size: 2.2em;
+
+            cursor: pointer;
+        }
+    }
+
+    .privacy-section {
+        --font-size: 0.5rem;
+        --font-color: #5A6566;
+
+        padding: 20px 15px;
+        & {
+            color: var(--font-color);
+
+            display: flex;
+            align-items: center;
+
+            gap: 15px;
+        }
+
+        a {
+            & {
+                font-size: var(--font-size);
+                letter-spacing: 1px;
+
+                all: unset;
+                transition: .25s ease;
+            }
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
 }
 
