@@ -15,6 +15,10 @@ body, html {
     color: var(--text-color);
     font-family: var(--font-family);
 }
+p {
+    all: unset;
+}
+
 
 
 .navbar {
@@ -30,78 +34,109 @@ body, html {
         display: flex;
         align-items: center;
     }
-    
-    .logo {
-        margin-right: 40px;
+
+    .side {
+        flex: 1;
+    }
+    .center {
+        flex-grow: 0;
     }
 
-    .searchbar {
-        margin-right: 40px;
-
-        --bg-color: #fff;
-        
+    .links {
         & {
-            width: 20%;
-
             display: flex;
-            background-color: var(--bg-color);
-            border-radius: 17.5px;
-            padding: 7.5px;
+            gap: 50px;
         }
 
-        button {
+        a {
+            --font-size: 1.15rem;
+            --font-color: #fff;
+            --active-color: #1867fc;
+            --hover-color: #1b86eb;
+
             & {
-                background: #dddddd00;
-                border: none;
+                font-weight: 400;
+                font-size: var(--font-size);
+                color: var(--font-color);
+                text-shadow: 0 0 5px #000;
+
+                border-bottom: 3px solid;
+                border-color: #ffffff00;
+                border-radius: 2px;
+                padding: 10px 0;
+                margin-top: 5px;
+
+                transition: .35s;
+
                 cursor: pointer;
             }
+            &.active {
+                border-color: var(--active-color);
+            }
+            &:not(.active):hover {
+                border-color: var(--hover-color);
+            }
         }
-
-        input {
-            width: 100%;
-            background-color: var(--bg-color);
-            border: none;
-        }
-        input:focus {
-            outline: none;
-            box-shadow: none;
-        }
-
     }
 
     .btns {
-        
-        --bg-color: #fff;
-        --text-color: #000;
-
+        --btn-color: #0E56C1;
+        --btn-color-bx: #0e50b3;
+        --btn-color-hv: #2362c1;
+        --font-color: #fff;
         & {
-            margin-left: auto; 
-            margin-right: 0;
-
             display: flex;
             justify-content: flex-end;
+            align-items: center;
 
-            gap: 15px;
+            color: var(--font-color);
+
+            gap: 25px;
         }
-        
+
         button {
             & {
-                background-color: var(--bg-color);
-                color: var(--text-color);
-                font-weight: 600;
+                display: inline-flex;
+                align-items: center;
+                gap: 2.5px;
+
+                color: var(--font-color);
+                background-color: var(--btn-color);
+                box-shadow: 0 0 3px var(--btn-color-bx);
 
                 border: none;
-                border-radius: 12.5px;
-                padding: 10px 12.5px;
+                margin: 0;
+                padding: 7.5px 13.5px;
+                border-radius: 10px;
 
                 cursor: pointer;
 
-                filter: invert(0);
-                transition: .25s; 
+                transition: .35s;
             }
             &:hover {
-                filter: invert(1);
+                background-color: var(--btn-color-hv);
             }
+
+            size {
+                font-size: 1.4rem;
+                font-weight: 500;
+            }
+        }
+
+        i {
+            font-size: 1.1rem;
+            margin-left: 10px;
+
+            cursor: pointer;
+        }
+
+        .account {
+            width: 32px;
+            border-radius: 128px;
+            background-color: #fff;
+            object-fit: cover;
+
+            cursor: pointer;
         }
     }
 }
@@ -130,6 +165,51 @@ body, html {
             color: var(--text-color);
             font-size: 1.75rem;
             text-shadow: 0 0 7px #000;
+        }
+    }
+
+    .side-sep {
+        margin-top: 30px;
+        padding: 0 80px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    .title {
+        --text-color: #034E79;
+
+        & {
+            display: block;
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+    }
+
+    a.link {
+        --text-color: #3f6cc0;
+
+        --font-size: 1rem;
+
+        & {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: var(--font-size);
+
+            text-decoration: none;
+            border-bottom: 1.5px solid #ffffff00;
+        }
+        &:hover {
+            border-bottom: 1.5px solid var(--text-color)
+        }
+        i {
+            font-size: calc(var(--font-size) - 0.3rem);
         }
     }
 
@@ -173,10 +253,6 @@ body, html {
                     flex-direction: column;
                     padding: 10px;
                     row-gap: 2.5px;
-                }
-
-                p {
-                    all: unset;
                 }
 
                 .name {
@@ -229,8 +305,13 @@ body, html {
 }
 
 .footer {
+    --bg-color: #052A56;
+
     & {
+        background-color: var(--bg-color);
+        
         padding: 15px 150px;
+        margin-top: 50px;
     }
 
     hr {
@@ -244,7 +325,7 @@ body, html {
     .infopoint {
         --font-size-tit: 1.2rem;
         --font-size-el: 0.45rem;
-        --text-color: #5A6566;
+        --text-color: #ffffff;
 
         padding: 30px 15px;
         & {
@@ -270,7 +351,6 @@ body, html {
                     font-size: var(--font-size-el);
 
                     all: unset;
-                    transition: .25s;
                 }
                 &:hover {
                     text-decoration: underline;
@@ -285,7 +365,7 @@ body, html {
             display: flex;
         }
         i {
-            color: #BBBBBB;
+            color: #ffffff;
             font-size: 2.2em;
 
             cursor: pointer;
@@ -294,7 +374,7 @@ body, html {
 
     .privacy-section {
         --font-size: 0.5rem;
-        --text-color: #5A6566;
+        --text-color: #ffffff;
 
         padding: 20px 15px;
         & {
@@ -312,7 +392,6 @@ body, html {
                 letter-spacing: 1px;
 
                 all: unset;
-                transition: .25s;
             }
             &:hover {
                 text-decoration: underline;
@@ -323,4 +402,7 @@ body, html {
 
 .logo {
     height: 55px;
+
+    object-position: left;
+    object-fit: contain;
 }
