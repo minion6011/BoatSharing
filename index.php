@@ -25,7 +25,7 @@
 
         <div class="side-sep">
             <p class="title">In Evidenza</p>
-            <a href="test.html" class="link">
+            <a class="link">
                 Vedi tutti
                 <i class="fa fa-arrow-right"></i>
             </a>

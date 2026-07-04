@@ -1,15 +1,18 @@
+<script src="assets/js/navbar.js" type="text/javascript" defer></script>
 <div class="navbar">
-    <img class="side logo">
-    <div class="center links">
-        <a class="active">Home</a>
+    <img class="logo">
+    <div class="links" id="nav-link">
         <a>Esplora</a>
+        <a href="index.php">Home</a>
         <a>Chi siamo</a>
     </div>
-    <div class="side btns">
+    <div class="btns">
         <button>
             <size>+</size> 
             Pubblica un mezzo
         </button>
-        <img src="assets/images/ui/add.svg" class="account">
+        <a href="account.php">
+            <img src="assets/images/ui/add.svg" class="account">
+        </a>
     </div>
 </div>
