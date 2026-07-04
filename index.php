@@ -5,19 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>BoatSharing | Viaggia condividendo</title>
-    <link rel="icon" href="assets/imgs/logo.svg"/>
+    <link rel="icon" href="assets/images/ui/logo.svg"/>
     
-    <link rel="stylesheet" href="style.css">
-    <script src="main.js" type="text/javascript" defer></script>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <?php
-        include("components/navbar.html")
+        include("components/navbar.php")
     ?>
 
     <div class="content">
         <div class="presentation">
-            <img src="assets/imgs/presentation.jpg">
+            <img src="assets/images/ui/presentation.jpg">
             <text>
                 Esplora le acque con la <b>barca dei tuoi sogni. <br>
                 BoatSharing</b>, il modo più facile per navigare
@@ -32,79 +31,69 @@
             </a>
         </div>
         <div class="boats">
+            <?php
+                $ini = parse_ini_file("config.ini", true);
 
-            <div class="card">
-                <img src="assets/boats/template1.jpg">
-                <div class="infos">
-                    <p class="name">Barca a motore</p>
+                $servername = $ini["DB"]["servername"];
+                $dbname = $ini["DB"]["dbname"];
 
-                    <div class="location">
-                        <i class="fa fa-map-marker"></i>
-                        <p>Palermo, 90121</p>
-                    </div>
+                $username = $ini["DB"]["username"];
+                $password = $ini["DB"]["password"];
+                
+                $imgpath = $ini["Paths"]["boatimgs"];
 
-                    <div class="location">
-                        <i class="fa fa-angle-double-right"></i>
-                        <p>Brindisi</p>
-                    </div>
 
-                    <button>
-                        <i class="fa fa-phone"></i>
-                        Contatta
-                    </button>
-                </div>
-            </div>
+                // Create connection
+                $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-            <div class="card">
-                <img src="assets/boats/template2.jpg">
-                <div class="infos">
-                    <p class="name">Barca a vela</p>
+                if (!$conn) {
+                    //die("Connection failed: " . mysqli_connect_error());
+                    die();
+                }
 
-                    <div class="location">
-                        <i class="fa fa-map-marker"></i>
-                        <p>Napoli, 80020</p>
-                    </div>
+                $sql = "SELECT * FROM `boats`";
+                $result = mysqli_query($conn, $sql);
+                if (mysqli_num_rows($result) > 0) {
+                    while($row = mysqli_fetch_assoc($result)) {
+                        echo "
+                            <div class='card'>
+                                <img src='{$imgpath}{$row['img']}'>
+                                <div class='infos'>
+                                    <p class='name'>{$row['name']}</p>
 
-                    <div class="location">
-                        <i class="fa fa-angle-double-right"></i>
-                        <p>Fossa delle marianne</p>
-                    </div>
+                                    <div class='location'>
+                                        <i class='fa fa-map-marker'></i>
+                                        <p>{$row['start_city']}, {$row['start_cap']}</p>
+                                    </div>
 
-                    <button>
-                        <i class="fa fa-phone"></i>
-                        Contatta
-                    </button>
-                </div>
-            </div>
+                                    <div class='location'>
+                                        <i class='fa fa-angle-double-right'></i>
+                                        <p>{$row['destination']}</p>
+                                    </div>
 
-            <div class="card">
-                <img src="assets/boats/template3.jpg">
-                <div class="infos">
-                    <p class="name">Mini Yatch</p>
+                                    <input type='hidden' value='{$row['userid']}' name='userid'>
 
-                    <div class="location">
-                        <i class="fa fa-map-marker"></i>
-                        <p>Genova, 16100</p>
-                    </div>
+                                    <button>
+                                        <i class='fa fa-phone'></i>
+                                        Contatta
+                                    </button>
+                                </div>
+                            </div>
+                        ";
+                    }
+                } else {
+                    echo "Error creating table: " . mysqli_error($conn);
+                }
 
-                    <div class="location">
-                        <i class="fa fa-angle-double-right"></i>
-                        <p>Livorno</p>
-                    </div>
-
-                    <button>
-                        <i class="fa fa-phone"></i>
-                        Contatta
-                    </button>
-                </div>
-            </div>
+                mysqli_close($conn);
+            ?>
         </div>
     </div>
 
     <br><br>
 
     <?php
-        include("components/footer.html")
+        include("components/footer.php")
     ?>
 </body>
 </html>

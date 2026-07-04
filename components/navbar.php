@@ -10,6 +10,6 @@
             <size>+</size> 
             Pubblica un mezzo
         </button>
-        <img src="assets/imgs/add.svg" class="account">
+        <img src="assets/images/ui/add.svg" class="account">
     </div>
 </div>
