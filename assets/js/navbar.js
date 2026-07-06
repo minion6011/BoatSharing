@@ -2,25 +2,20 @@ const navbarLinks = document.getElementById("nav-link");
 
 const elements = navbarLinks.children;
 
-let isIndex = true;
-let indexElement;
 
-for (let i = 0; i < elements.length; i++) {
+for (let i = 0; i < elements.length; i++) { // To-Do: improve the code
     if (elements[i].tagName != "A")
         continue;
     if (elements[i].href == "")
         continue;
 
-    if (elements[i].href.includes("index.php")) 
-        indexElement = elements[i];
+    if (elements[i].href.includes("index.php") && !window.location.pathname.endsWith(".php")) {
+        elements[i].classList.add("active");
+        break;
+    }
 
     if (window.location.href != elements[i].href)
-        continue
+        continue;
 
-    isIndex = false;
     elements[i].classList.add("active");
-}
-
-if (isIndex && indexElement) {
-    indexElement.classList.add("active")
 }

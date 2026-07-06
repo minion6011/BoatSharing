@@ -1,0 +1,118 @@
+body, html {
+    background-color: #05172F;
+}
+
+a {
+    & {
+        text-decoration: none;
+    }
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.content {
+    .login {
+        --components-width: 275px;
+
+        & {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            
+            background: #132033;
+            background: radial-gradient(circle at top left, #3A4557, #132033e6 47.5%);
+            box-shadow: -11px 11px 20px -20px #fff;
+
+            border: 1.5px solid #1E2D40;
+            border-radius: 5px;
+            padding: 25px;
+
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            row-gap: 12.5px;
+        }
+
+        .title {
+            & {
+                display: flex;
+                align-items: center;
+            }
+            .logo {
+                height: 38px;
+            }
+            p {
+                --text-color: #fff;
+
+                & {
+                    color: var(--text-color);
+                    font-size: 1.2rem;
+                }
+            }
+        }
+
+        form {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            row-gap: 12.5px;
+            
+            input {
+                & {
+                    box-sizing: border-box;
+
+                    background-color: #0d1d34;
+                    color: #fff;
+                    font-size: 0.9rem;
+                    
+                    border: 1.5px solid #39516e;
+                    border-radius: 5px;
+
+                    padding: 12.5px;
+                    width: var(--components-width);
+                }
+                &::placeholder {
+                    color: #8a919f;
+                }
+            }
+            button {
+                & {
+                    background-color: #18345A;
+                    color: #fff;
+
+                    border: 0;
+                    border-radius: 5px;
+
+                    padding: 12.5px;
+                    width: var(--components-width);
+
+                    transition: .25s;
+                }
+                &:hover {
+                    background-color: #1e4882;
+                }
+            }
+        }
+
+        .error {
+            color: #a91c1c;
+            font-size: 0.875rem;
+        }
+        .action {
+            & {
+                color: #6A7383;
+                font-size: 0.825rem;
+            }
+            a {
+                color: #fff;
+            }
+        }
+        .forgot {
+            color: #6A7383;
+            font-size: 0.825rem;
+        }
+
+    }
+}
