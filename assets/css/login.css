@@ -12,15 +12,16 @@ a {
 }
 
 .content {
+    & {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .login {
         --components-width: 275px;
 
-        & {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            
+        & { 
             background: #132033;
             background: radial-gradient(circle at top left, #3A4557, #132033e6 47.5%);
             box-shadow: -11px 11px 20px -20px #fff;

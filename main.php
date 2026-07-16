@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-    // Required
+    // Session
     session_start([
         'cookie_lifetime' => 0, 
         'cookie_secure' => true, 
@@ -7,26 +7,11 @@
         'cookie_samesite' => 'Strict'
     ]);
 
-    function login(int $userid) {
-        session_regenerate_id(true);
-        $_SESSION['user_id'] = $userid;
-    }
-    function checkLogin() {
-        if (!isset($_SESSION['user_id'])) {
-            header('Location: login.php');
-            exit;
-        }
-    }
-    function getConfig() {
-        $ini = parse_ini_file(__DIR__ . "/config.ini", true);
-        if (!isset($ini)) {
-            die("ini file not found");
-        }
-        return $ini;
-    }
-
     // Config
-    $ini = getConfig();
+    $ini = parse_ini_file(__DIR__ . "/config.ini", true);
+    if (!isset($ini)) {
+        die("ini file not found");
+    }
 
     // DB
     $servername = $ini["DB"]["servername"];
@@ -41,5 +26,18 @@
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch(PDOException $e) {
         die("Connection failed: " . $e->getMessage());
+    }
+    
+
+    function login(int $userid) {
+        session_regenerate_id(true);
+        $_SESSION['user_id'] = $userid;
+    }
+
+    function requireLogin() {
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: login.php');
+            exit;
+        }
     }
 ?>

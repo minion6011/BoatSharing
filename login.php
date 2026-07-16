@@ -30,7 +30,7 @@
                 <button type="submit" id="action-submit" name="account">ACCEDI</button>
             </form>
             <?php
-                require('main.php');
+                require_once "main.php";
 
                 if (isset($_GET["error"])) {
                     switch ($_GET["error"]) {

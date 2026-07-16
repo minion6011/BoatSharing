@@ -33,9 +33,8 @@
         </div>
         <div class="boats">
             <?php
-                require("main.php");
+                require_once "main.php";
 
-                $ini = getConfig();
                 $imgpath = $ini["Paths"]["boatimgs"];
 
                 $sql = "SELECT * FROM boats";
