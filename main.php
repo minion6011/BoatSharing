@@ -34,10 +34,27 @@
         $_SESSION['user_id'] = $userid;
     }
 
-    function requireLogin() {
-        if (!isset($_SESSION['user_id'])) {
+    function requireLogin(PDO $conn) {
+        if (!loggedIn($conn)) {
             header('Location: login.php');
             exit;
         }
+    }
+
+    function loggedIn(PDO $conn): bool {
+        if (empty($_SESSION['user_id']))
+            return false;
+        
+        $stmt = $conn->prepare("SELECT 1 FROM users WHERE id = :id");
+        $stmt->execute([
+            "id" => $_SESSION['user_id']
+        ]);
+        
+        $result = (bool) $stmt->fetchColumn();
+
+        if (!$result) // reset
+            $_SESSION['user_id'] = null;
+
+        return $result;
     }
 ?>

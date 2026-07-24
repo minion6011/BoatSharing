@@ -14,7 +14,7 @@
         <?php
             require_once "main.php";
 
-            if (isset($_SESSION['user_id'])) {
+            if (loggedIn($conn)) {
 
                 $sql = "SELECT user, color FROM users WHERE id = :id";
                 $stmt = $conn -> prepare($sql);

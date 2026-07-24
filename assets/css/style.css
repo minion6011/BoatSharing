@@ -9,10 +9,10 @@
     --text-color: #000000;
     --font-family: "Pliant", sans-serif;
 }
-
+/*
 *::-webkit-scrollbar {
     display: none;
-}
+}*/
 textarea:focus, input:focus{
     outline: none;
 }
@@ -163,7 +163,7 @@ p {
             border-radius: 128px;
             background-color: #fff;
             object-fit: cover;
-            border: 1.5px solid #000;
+            border: 1.5px solid #EBEBEB;
         }
     }
 }

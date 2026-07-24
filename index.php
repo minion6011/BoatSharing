@@ -37,7 +37,7 @@
 
                 $imgpath = $ini["Paths"]["boatimgs"];
 
-                $sql = "SELECT * FROM boats";
+                $sql = "SELECT * FROM boats ORDER BY id LIMIT 4";
                 $result = $conn -> query($sql);
 
                 foreach ($result->fetchAll() as $row) {

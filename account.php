@@ -1,7 +1,7 @@
 <?php
     require_once "main.php";
 
-    requirelogin();
+    requireLogin($conn)
 ?>
 
 <!DOCTYPE html>
@@ -16,11 +16,50 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/account.css">
 
-    <script src="assets/js/login.js" type="text/javascript" defer></script>
+    <script src="assets/js/account.js" type="text/javascript" defer></script>
 </head>
 <body>
     <?php
         include("components/navbar.php")
+    ?>
+
+    <?php 
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $userid = $_SESSION["user_id"];
+
+            requireLogin($conn);
+
+            $username = htmlspecialchars($_POST["username"], ENT_QUOTES);
+            $password = $_POST["password"];
+            $color_num = mb_substr($_POST["color"], 1); // #fff -> to -> fff
+            $color = isset($color_num) ? preg_replace('/[^a-fA-F0-9]/', '', $color_num) : '000000';
+            $id = $_SESSION["user_id"];
+
+            if (isset($password)) {
+                if (isset($_POST["password"])) {
+                    $sql = "UPDATE users SET user = :user, password = :password, color = :color WHERE id = :id";
+
+                    $stmt = $conn -> prepare($sql);
+                    $stmt -> execute([
+                        "user" => $username,
+                        "password" => password_hash($password, PASSWORD_DEFAULT), // https://bcrypt-generator.com/
+                        "color" => $color,
+                        "id" => $id
+                    ]);
+                } else {
+                    $sql = "UPDATE users SET user = :user, color = :color WHERE id = :id";
+                    $stmt = $conn -> prepare($sql);
+                    $stmt -> execute([
+                        "user" => $username,
+                        "color" => $color,
+                        "id" => $id
+                    ]);
+                }
+                
+                header("Location: " . "account.php");
+            }
+        }
     ?>
 
     <?php
@@ -33,71 +72,87 @@
         $result = $stmt -> fetch(PDO::FETCH_OBJ);
     ?>
 
-
     <div class="content">
         <div class="menu">
             <div>
                 <p class="title">Account</p>
-                <div class="account">
-                    <img src='components/avatar.php?color=<?php echo $result->color; ?>'>
-                    <?php
-                        if ($result) {
+                <form action='account.php' method='POST'>
+                    <div class="account">
+                        <?php
                             echo "
-                                <input type='text' placeholder='{$result->user}' value='{$result->user}' required>
+                                <div class='ico'>
+                                    <img class='userico' src='components/avatar.php?color={$result->color}'>
+
+                                    <button type='button' class='colorpicker' id='btncolor'>
+                                        <input type='color' name='color' value='#{$result->color}' id='inputcolor'>
+                                        <img id='svgcolor' src='assets/images/ui/ink.svg'>
+                                    </button>
+                                </div>
+
+                                <div class='inputs'>
+                                    <label for='username'>Username</label>
+                                    <input type='text' placeholder='{$result->user}' value='{$result->user}' name='username' required>
+                                    
+                                    <label for='password'>Password</label>
+                                    <input type='password' placeholder='password' name='password'>
+                                </div>
+                                <button type='submit' name='modify'>Modifica</button>
                             ";
-                        }
-                    ?>
-                </div>
+                        ?>
+                    </div>
+                </form>
             </div>
 
             <div>
-                <p class="title">Le mie barche</p>
+
+                <?php
+                    $imgpath = $ini["Paths"]["boatimgs"];
+        
+                    $sql = "SELECT * FROM boats WHERE userid = :id";
+                    $stmt = $conn -> prepare($sql);
+                    $stmt -> execute([
+                        "id" => $_SESSION["user_id"],
+                    ]);
+
+                    $boats = $stmt -> fetchAll(PDO::FETCH_OBJ);
+                    if (isset($boats) && count($boats) > 0) {
+                        echo "<p class='title'>Le mie barche</p>";
+                    }
+                ?>    
+
                 <div class="boats">
 
-
                     <?php
-                        $imgpath = $ini["Paths"]["boatimgs"];
-        
-                        $sql = "SELECT * FROM boats WHERE userid = :id";
-                        $stmt = $conn -> prepare($sql);
-                        $stmt -> execute([
-                            "id" => $_SESSION["user_id"],
-                        ]);
+                        foreach ($boats as $row) {
+                            echo "
+                                <div class='card'>
+                                    <img src='{$imgpath}{$row->img}'>
+                                    <div class='infos'>
+                                        <p class='name'>{$row->name}</p>
 
-                        $result = $stmt -> fetchAll(PDO::FETCH_OBJ);
+                                        <div class='location'>
+                                            <i class='fa fa-map-marker'></i>
+                                            <p>{$row->start_city}, {$row->start_cap}</p>
+                                        </div>
 
-                        if ($result) {
-                            //$passwordFetch = $row -> password;
-                            foreach ($result as $row) {
-                                echo "
-                                    <div class='card'>
-                                        <img src='{$imgpath}{$row->img}'>
-                                        <div class='infos'>
-                                            <p class='name'>{$row->name}</p>
-
-                                            <div class='location'>
-                                                <i class='fa fa-map-marker'></i>
-                                                <p>{$row->start_city}, {$row->start_cap}</p>
-                                            </div>
-
-                                            <div class='location'>
-                                                <i class='fa fa-angle-double-right'></i>
-                                                <p>{$row->destination}</p>
-                                            </div>
-                                            <div class='buttons'>
-                                                <button class='delete'>
-                                                    <img src='assets/images/ui/delete.svg'>
-                                                </button>
-                                                <button class='edit'>
-                                                    <img src='assets/images/ui/edit.svg'>
-                                                </button>
-                                            </div>
+                                        <div class='location'>
+                                            <i class='fa fa-angle-double-right'></i>
+                                            <p>{$row->destination}</p>
+                                        </div>
+                                        <div class='buttons'>
+                                            <button class='delete'>
+                                                <img src='assets/images/ui/delete.svg'>
+                                            </button>
+                                            <button class='edit'>
+                                                <img src='assets/images/ui/edit.svg'>
+                                            </button>
                                         </div>
                                     </div>
-                                ";
-                            }
+                                </div>
+                            ";
                         }
-                    ?>          
+                    ?>        
+
                 </div>
             </div>
         </div>

@@ -1,5 +1,9 @@
 body, html {
     background-color: #dae4f6;
+
+    background-image: url('../images/ui/sea.png');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .content {
@@ -17,16 +21,25 @@ body, html {
             grid-template-columns: minmax(0, 2.5fr);
             
             gap: 20px;
-            margin: 0 50px;
+            margin: 0 100px;
+        }
+        @media (max-width: 1010px) { 
+            & {
+                margin: 0 50px;
+            }
         }
 
         .title {
-            color: #034E79;
+            color: #fff;
+            text-shadow: 0px 0px 5px #000;
             font-weight: 500;
             font-size: 1.3rem;
         }
 
         & > div {
+            --box-shadow-color: #fff;
+            --box-shadow-size: 10px;
+
             & {
                 display: flex;
                 flex-direction: column;
@@ -36,8 +49,13 @@ body, html {
                 width: max-content;
                 max-width: 100%;
             }
+
             .account {
+                --inputs-width: 100px;
+
                 & {
+                    min-width: 60px;
+
                     display: flex;
                     align-items: center;
                     flex-direction: column;
@@ -47,34 +65,122 @@ body, html {
                     background-color: #fff;
                     padding: 20px 70px;
                     border-radius: 7.5px;
-                }
-                img {
-                    width: 50px;
-                    border-radius: 150px;
-                    border: 1.5px solid #000;
-                }
-                input {
-                    box-sizing: border-box;
 
-                    color: #000000;
-                    font-size: 0.9rem;
+                    box-shadow: 0px 0px var(--box-shadow-size) var(--box-shadow-color);
+                }
+                .ico {
+                    & {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 10px;
+                    }
+
+                    .userico {
+                        width: 50px;
+                        border-radius: 150px;
+                        border: 1.5px solid #EBEBEB;
+                    }
+
+                    .colorpicker {
+                        & {
+                            cursor: pointer;
+                            
+                            padding: 2.5px;
+                            border: 1.5px solid #00000014;
+                            border-radius: 50%;
+
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                        input[type="color"] {
+                            opacity: 0;
+                            position: fixed;
+
+                            margin-top: 10px;
+                        }
+                        img {
+                            width: 24px;
+                        }
+                    }
+
+                }
+                .inputs {
+                    & {
+                        display: grid;
+                        grid-template-columns: 0.7fr 1fr;
+
+                        align-items: center;
+                        justify-items: start;
+
+                        column-gap: 5px;
+                        row-gap: 5px;
+                    }
+                    label {
+                        font-size: 0.95rem;
+                    }
                     
-                    border: 1.5px solid #000;
-                    border-radius: 5px;
+                    input {
+                        box-sizing: border-box;
 
-                    padding: 5px;
-                    width: 100px;
+                        color: #000000;
+                        font-size: 0.9rem;
+                        
+                        border: 1.5px solid #EBEBEB;
+                        border-radius: 5px;
+
+                        padding: 5px;
+                        width: var(--inputs-width);
+                    }
+                }
+                button[type='submit'] {
+                    & {
+                        color: #fff;
+                        background-color: #2362C1;
+                        
+                        margin-top: 2.5px;
+
+                        padding: 10px 15px;
+                        border: none;
+                        border-radius: 7.5px;
+
+                        cursor: pointer;
+
+                        transition: background-color .25s;
+                    }
+                    &:hover {
+                        background-color: #3576d8;
+                    }
                 }
             }
+            
             .boats {
                 & {
                     display: flex;
                     align-items: center;
 
-                    column-gap: 5px;
+                    column-gap: 10px;
 
-                    overflow: auto;
+                    padding: var(--box-shadow-size);
+                    margin: calc(-1 * var(--box-shadow-size));
+
+                    overflow-x: auto;
                 }
+                &::-webkit-scrollbar {
+                    height: 5px;
+                }
+
+                &::-webkit-scrollbar-track {
+                    background: #3184be52; 
+                    cursor: pointer;
+                }
+                &::-webkit-scrollbar-thumb {
+                    background: #ffffff99;
+                    border-radius: 10px;
+                    cursor: pointer;
+                }
+
                 .card {
                     & {
                         display: flex;
@@ -86,14 +192,18 @@ body, html {
                         border-radius: 10px;
                         background-color: #ffffff;
                         overflow: hidden;
+
+                        box-shadow: 0px 0px var(--box-shadow-size) var(--box-shadow-color);
+
+                        transition: box-shadow .5s;
+                    }
+                    &:hover {
+                        box-shadow: 0px 0px var(--box-shadow-size) #6d6d6d;
                     }
                     @media (max-width: 1010px) { 
                         & {
                             width: 200px;
                         }
-                    }
-                    &:hover {
-                        box-shadow: inset 0 0 10px #dae4f6;
                     }
 
                     img {
@@ -185,5 +295,4 @@ body, html {
             }
         }
     }
-    
 }

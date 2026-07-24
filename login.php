@@ -51,55 +51,57 @@
                 }
 
 
-                if (isset($_POST["account"])) {
-                    
-                    $action = htmlspecialchars($_POST["action"], ENT_QUOTES);
-                    $username = htmlspecialchars($_POST["username"], ENT_QUOTES);
-                    $password = $_POST["password"];
-                    
-                    switch ($action) {
-                        case "login":
-                            $sql = "SELECT id, password FROM users WHERE user = :user";
-                            $stmt = $conn -> prepare($sql);
-                            $stmt -> execute([
-                                "user" => $username,
-                            ]);
-
-                            $row = $stmt -> fetch(PDO::FETCH_OBJ);
-
-                            if ($row) {
-                                $passwordFetch = $row -> password;
-                                if (!password_verify($password, $passwordFetch)) {
-                                    header("Location: " . "login.php?error=password");
-                                    exit;
-                                }
-                                $id = $row -> id;
-                            } else {
-                                header("Location: " . "login.php?error=notfound");
-                                exit;
-                            }
-
-                            break;
-                        case "register":
-                            try {
-                                $sql = "INSERT INTO users (user, password) VALUES (:user, :password) RETURNING id";
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    if (!loggedIn($conn)) {
+                        $action = htmlspecialchars($_POST["action"], ENT_QUOTES);
+                        $username = htmlspecialchars($_POST["username"], ENT_QUOTES);
+                        $password = $_POST["password"];
+                        
+                        switch ($action) {
+                            case "login":
+                                $sql = "SELECT id, password FROM users WHERE user = :user";
                                 $stmt = $conn -> prepare($sql);
                                 $stmt -> execute([
                                     "user" => $username,
-                                    "password" => password_hash($password, PASSWORD_DEFAULT) // https://bcrypt-generator.com/
                                 ]);
-                                $id = $stmt -> fetch(PDO::FETCH_OBJ) -> id;
-                            } catch(PDOException $e) {
-                                //echo $sql . "<br>" . $e->getMessage();
-                                header("Location: " . "login.php?error=exist");
-                                exit;
-                            }
-                            break;
-                    }
 
-                    if (isset($id)) {
-                        login($id);
-                        header("Location: " . "index.php");
+                                $row = $stmt -> fetch(PDO::FETCH_OBJ);
+
+                                if ($row) {
+                                    $passwordFetch = $row -> password;
+                                    if (!password_verify($password, $passwordFetch)) {
+                                        header("Location: " . "login.php?error=password");
+                                        exit;
+                                    }
+                                    $id = $row -> id;
+                                } else {
+                                    header("Location: " . "login.php?error=notfound");
+                                    exit;
+                                }
+
+                                break;
+                            case "register":
+                                try {
+                                    $sql = "INSERT INTO users (user, password) VALUES (:user, :password)";
+                                    $stmt = $conn -> prepare($sql);
+                                    $stmt -> execute([
+                                        "user" => $username,
+                                        "password" => password_hash($password, PASSWORD_DEFAULT) // https://bcrypt-generator.com/
+                                    ]);
+                                    //$id = $stmt -> fetch(PDO::FETCH_OBJ) -> id;
+                                    $id = $conn -> lastInsertId();
+                                } catch(PDOException $e) {
+                                    //echo $sql . "<br>" . $e->getMessage();
+                                    header("Location: " . "login.php?error=exist");
+                                    exit;
+                                }
+                                break;
+                        }
+
+                        if (isset($id)) {
+                            login($id);
+                            header("Location: " . "index.php");
+                        }
                     }
                 }
             ?>
