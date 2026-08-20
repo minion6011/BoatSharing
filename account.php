@@ -36,29 +36,31 @@
             $color = isset($color_num) ? preg_replace('/[^a-fA-F0-9]/', '', $color_num) : '000000';
             $id = $_SESSION["user_id"];
 
-            if (isset($password)) {
-                if (isset($_POST["password"])) {
-                    $sql = "UPDATE users SET user = :user, password = :password, color = :color WHERE id = :id";
+            // To-Do: Add controll for $username, %color
 
-                    $stmt = $conn -> prepare($sql);
-                    $stmt -> execute([
-                        "user" => $username,
-                        "password" => password_hash($password, PASSWORD_DEFAULT), // https://bcrypt-generator.com/
-                        "color" => $color,
-                        "id" => $id
-                    ]);
-                } else {
-                    $sql = "UPDATE users SET user = :user, color = :color WHERE id = :id";
-                    $stmt = $conn -> prepare($sql);
-                    $stmt -> execute([
-                        "user" => $username,
-                        "color" => $color,
-                        "id" => $id
-                    ]);
-                }
-                
-                header("Location: " . "account.php");
+            if (empty($password)) {
+                $sql = "UPDATE users SET user = :user, color = :color WHERE id = :id";
+                $stmt = $conn -> prepare($sql);
+                $stmt -> execute([
+                    "user" => $username,
+                    "color" => $color,
+                    "id" => $id
+                ]);
+
+            } else {
+                $sql = "UPDATE users SET user = :user, password = :password, color = :color WHERE id = :id";
+
+                $stmt = $conn -> prepare($sql);
+                $stmt -> execute([
+                    "user" => $username,
+                    "password" => password_hash($password, PASSWORD_DEFAULT), // https://bcrypt-generator.com/
+                    "color" => $color,
+                    "id" => $id
+                ]);
             }
+            
+            header("Location: " . "account.php");
+            
         }
     ?>
 
@@ -104,7 +106,6 @@
             </div>
 
             <div>
-
                 <?php
                     $imgpath = $ini["Paths"]["boatimgs"];
         
@@ -143,7 +144,17 @@
                                             <button class='delete'>
                                                 <img src='assets/images/ui/delete.svg'>
                                             </button>
-                                            <button class='edit'>
+                                            <button 
+                                                class='edit' 
+                                                onclick='openEditModal(this)'
+
+                                                data-id='{$row->id}' 
+                                                data-name='{$row->name}' 
+                                                data-img='{$imgpath}{$row->img}'
+                                                data-start_city='{$row->start_city}'
+                                                data-start_cap='{$row->start_cap}'
+                                                data-destination='{$row->start_city}'
+                                            >
                                                 <img src='assets/images/ui/edit.svg'>
                                             </button>
                                         </div>
@@ -157,6 +168,10 @@
             </div>
         </div>
     </div>
+
+    <?php
+        include("components/modals.php")
+    ?>
 
     <?php
         include("components/footer.php")

@@ -1,5 +1,10 @@
 body, html {
     background-color: #05172F;
+
+    background-image: url('../images/ui/bglogin.jpg');
+    /*https://www.magnific.com/it/foto-gratuito/scatto-ipnotizzante-delle-onde-oceaniche-cristalline_17530073.htm">Immagine di wirestock su Magnific*/
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 a {
@@ -22,12 +27,12 @@ a {
         --components-width: 275px;
 
         & { 
-            background: #132033;
-            background: radial-gradient(circle at top left, #3A4557, #132033e6 47.5%);
-            box-shadow: -11px 11px 20px -20px #fff;
+            background: #11213af2;
+            background: radial-gradient(circle at top left, #14233cd9, #0f203cf2);
+            backdrop-filter: blur(2px);
+            box-shadow: 0 20px 40px #18181866;
 
-            border: 1.5px solid #1E2D40;
-            border-radius: 5px;
+            border-radius: 10px;
             padding: 25px;
 
             display: flex;
@@ -80,7 +85,7 @@ a {
             }
             button {
                 & {
-                    background-color: #18345A;
+                    background-color: #072f62;
                     color: #fff;
 
                     border: 0;
@@ -92,7 +97,7 @@ a {
                     transition: .25s;
                 }
                 &:hover {
-                    background-color: #1e4882;
+                    background-color: #0c3e7d;
                 }
             }
         }
@@ -103,7 +108,7 @@ a {
         }
         .action {
             & {
-                color: #6A7383;
+                color: #8c929e;
                 font-size: 0.825rem;
             }
             a {
@@ -111,7 +116,7 @@ a {
             }
         }
         .forgot {
-            color: #6A7383;
+            color: #8c929e;
             font-size: 0.825rem;
         }
 
