@@ -8,6 +8,7 @@
 
         img {
             width: 100%;
+            /* height: 100vh; */
         }
         text {
             & {
@@ -148,8 +149,8 @@
                     }
                 }
                 button {
-                    --bg-color: #59A8DF;
-                    --bg-color-hover: #4f8ebb;
+                    --bg-color: #4597f1;
+                    --bg-color-hover: #6fb4ff;
                     --text-color: #fff;
 
                     & {

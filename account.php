@@ -4,6 +4,39 @@
     requireLogin($conn)
 ?>
 
+<?php // Post Request
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $userid = $_SESSION["user_id"];
+        //requireLogin($conn);
+        $username = htmlspecialchars($_POST["username"], ENT_QUOTES);
+        $password = $_POST["password"];
+        $color_num = mb_substr($_POST["color"], 1); // #fff -> to -> fff
+        $color = isset($color_num) ? preg_replace('/[^a-fA-F0-9]/', '', $color_num) : '000000';
+        $id = $_SESSION["user_id"];
+        // To-Do: Add controll for $username, %color
+        if (empty($password)) {
+            $sql = "UPDATE users SET user = :user, color = :color WHERE id = :id";
+            $stmt = $conn -> prepare($sql);
+            $stmt -> execute([
+                "user" => $username,
+                "color" => $color,
+                "id" => $id
+            ]);
+        } else {
+            $sql = "UPDATE users SET user = :user, password = :password, color = :color WHERE id = :id";
+            $stmt = $conn -> prepare($sql);
+            $stmt -> execute([
+                "user" => $username,
+                "password" => password_hash($password, PASSWORD_DEFAULT), // https://bcrypt-generator.com/
+                "color" => $color,
+                "id" => $id
+            ]);
+        }
+        
+        header("Location: " . "account.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -21,47 +54,6 @@
 <body>
     <?php
         include("components/navbar.php")
-    ?>
-
-    <?php 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            $userid = $_SESSION["user_id"];
-
-            requireLogin($conn);
-
-            $username = htmlspecialchars($_POST["username"], ENT_QUOTES);
-            $password = $_POST["password"];
-            $color_num = mb_substr($_POST["color"], 1); // #fff -> to -> fff
-            $color = isset($color_num) ? preg_replace('/[^a-fA-F0-9]/', '', $color_num) : '000000';
-            $id = $_SESSION["user_id"];
-
-            // To-Do: Add controll for $username, %color
-
-            if (empty($password)) {
-                $sql = "UPDATE users SET user = :user, color = :color WHERE id = :id";
-                $stmt = $conn -> prepare($sql);
-                $stmt -> execute([
-                    "user" => $username,
-                    "color" => $color,
-                    "id" => $id
-                ]);
-
-            } else {
-                $sql = "UPDATE users SET user = :user, password = :password, color = :color WHERE id = :id";
-
-                $stmt = $conn -> prepare($sql);
-                $stmt -> execute([
-                    "user" => $username,
-                    "password" => password_hash($password, PASSWORD_DEFAULT), // https://bcrypt-generator.com/
-                    "color" => $color,
-                    "id" => $id
-                ]);
-            }
-            
-            header("Location: " . "account.php");
-            
-        }
     ?>
 
     <?php
@@ -109,10 +101,10 @@
                 <?php
                     $imgpath = $ini["Paths"]["boatimgs"];
         
-                    $sql = "SELECT * FROM boats WHERE userid = :id";
+                    $sql = "SELECT * FROM boats WHERE userid = :userid";
                     $stmt = $conn -> prepare($sql);
                     $stmt -> execute([
-                        "id" => $_SESSION["user_id"],
+                        "userid" => $_SESSION["user_id"],
                     ]);
 
                     $boats = $stmt -> fetchAll(PDO::FETCH_OBJ);

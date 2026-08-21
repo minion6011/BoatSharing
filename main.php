@@ -57,4 +57,39 @@
 
         return $result;
     }
+
+    /**
+     * Return a Code based on the image status: 0, Success; 1 Empty; 2 Error
+     */
+    function validateImg(array|null $file, int $maxsize): int {
+        // No file
+        if ($file == null)
+            return 1;
+
+        $fileSize = $file['size']; // Size in bytes
+
+        // File empty
+        if ($file['error'] == UPLOAD_ERR_NO_FILE || $fileSize === 0)
+            return 1;
+
+        // Unable to upload, or max size surpassed
+        if ($file['error'] !== UPLOAD_ERR_OK || $fileSize > $maxsize)
+            return 2;
+
+        // Security Check only HTTPS allowed
+        if (!is_uploaded_file($file['tmp_name']))
+            return 2;
+
+        // Check if the file type is valid
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($finfo, $file['tmp_name']);
+
+        $allowedMimeTypes = ['image/jpeg','image/jpg', 'image/png', 'image/webp'];
+        if (!in_array($mimeType, $allowedMimeTypes, true)) {
+            return 2; 
+        }
+
+        return 0;
+    }
+
 ?>

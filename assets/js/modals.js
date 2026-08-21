@@ -2,6 +2,9 @@ const modalsContainer = document.getElementById("modals-cnt");
 
 const editModal = {
     element: document.getElementById("edit-modal"),
+    form: document.getElementById("edit-form"),
+
+    id: document.getElementById("edit-id"), 
     name: document.getElementById("edit-name"),
 
     img: document.getElementById("edit-img"),
@@ -10,7 +13,9 @@ const editModal = {
 
     start_city: document.getElementById("edit-start_city"),
     start_cap: document.getElementById("edit-start_cap"),
-    destination: document.getElementById("edit-destination")
+    destination: document.getElementById("edit-destination"),
+
+    submit: document.getElementById("edit-submit")
 }
 
 let currentModal = null;
@@ -57,7 +62,7 @@ function openEditModal(button) {
     const start_cap = button.dataset.start_cap;
     const destination = button.dataset.destination;
 
-
+    editModal.id.value = id;
     editModal.name.value = name;
     editModal.img.src = img;
     editModal.start_city.value = start_city;
