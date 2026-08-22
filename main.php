@@ -9,7 +9,7 @@
 
     // Config
     $ini = parse_ini_file(__DIR__ . "/config.ini", true);
-    if (!isset($ini)) {
+    if ($ini === false) {
         die("ini file not found");
     }
 
@@ -36,7 +36,8 @@
 
     function requireLogin(PDO $conn) {
         if (!loggedIn($conn)) {
-            header('Location: login.php');
+            $current_url = $_SERVER['REQUEST_URI'];
+            header("Location: login.php?redirect=" . urlencode($current_url));
             exit;
         }
     }
@@ -53,7 +54,7 @@
         $result = (bool) $stmt->fetchColumn();
 
         if (!$result) // reset
-            $_SESSION['user_id'] = null;
+            unset($_SESSION['user_id']);
 
         return $result;
     }

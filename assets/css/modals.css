@@ -15,6 +15,7 @@ html:has(.modals.open), body:has(.modals.open) {
         position: fixed;
         top: 0;
         left: 0;
+        z-index: 1;
 
         height: 100%;
         width: 100%;
@@ -33,9 +34,14 @@ html:has(.modals.open), body:has(.modals.open) {
 
     .modal {
         & {
+            display: none;
+
             background-color: #fff;
             border-radius: 10px;
             padding: 20px;
+        }
+        &.open {
+            display: block;
         }
 
         .top {
@@ -245,6 +251,48 @@ html:has(.modals.open), body:has(.modals.open) {
                             }
                             i.fa { /* Font Awesome Icons */
                                 color: #989898;
+                            }
+                        }
+                    }
+                }
+                &.buttons {
+                    & {
+                        display: flex;
+                        align-items: center;
+                    }
+                    .input {
+                        & {
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                        }
+                        button {
+                            margin: 0;
+                            padding: 11px 12.5px;
+
+                            border: none;
+                            border-radius: 10px;
+
+                            cursor: pointer;
+                            
+                            color: #fff;
+                            transition: .25s;
+                        }
+
+                        button.delete {
+                            & {
+                                background-color: #C83E3E;
+                            }
+                            &:hover {
+                                background-color: #A93232;
+                            }
+                        }
+                        button.cancel {
+                            & {
+                                background-color: #2F6F8F;
+                            }
+                            &:hover {
+                                background-color: #245873;
                             }
                         }
                     }

@@ -37,6 +37,7 @@
     }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -54,6 +55,28 @@
 <body>
     <?php
         include("components/navbar.php")
+    ?>
+
+    <?php
+        include("components/modals.php")
+    ?>
+
+    <?php // Get Request
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            if (isset($_GET["modal"])) {
+                switch ($_GET["modal"]) {
+                    case "create":
+                        echo "
+                        <script>
+                            document.addEventListener('DOMContentLoaded', () => {
+                                openCreateModal();
+                            });
+                        </script>
+                        ";
+                        break;
+                }
+            }
+        }
     ?>
 
     <?php
@@ -115,7 +138,8 @@
 
                 <div class="boats">
 
-                    <?php
+                    <?php 
+                        // To-Do: Add Paginator
                         foreach ($boats as $row) {
                             echo "
                                 <div class='card'>
@@ -133,7 +157,12 @@
                                             <p>{$row->destination}</p>
                                         </div>
                                         <div class='buttons'>
-                                            <button class='delete'>
+                                            <button 
+                                                class='delete'
+                                                onclick='openDeleteModal(this)'
+
+                                                data-id='{$row->id}'
+                                            >
                                                 <img src='assets/images/ui/delete.svg'>
                                             </button>
                                             <button 
@@ -145,7 +174,7 @@
                                                 data-img='{$imgpath}{$row->img}'
                                                 data-start_city='{$row->start_city}'
                                                 data-start_cap='{$row->start_cap}'
-                                                data-destination='{$row->start_city}'
+                                                data-destination='{$row->destination}'
                                             >
                                                 <img src='assets/images/ui/edit.svg'>
                                             </button>
@@ -160,10 +189,6 @@
             </div>
         </div>
     </div>
-
-    <?php
-        include("components/modals.php")
-    ?>
 
     <?php
         include("components/footer.php")

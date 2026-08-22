@@ -7,10 +7,12 @@
         <a href="about.php">Chi siamo</a>
     </div>
     <div class="btns">
-        <button>
-            <size>+</size> 
-            Pubblica un mezzo
-        </button>
+        <a href="account.php?modal=create">
+            <button>
+                <size>+</size> 
+                Pubblica un mezzo
+            </button>
+        </a>
         <?php
             require_once "main.php";
 

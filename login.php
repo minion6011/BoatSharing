@@ -25,6 +25,12 @@
             </div>
             <form action="login.php" method="POST">
                 <input type="hidden" value="login" id="action-type" name="action">
+                <?php
+                    if (isset($_GET["redirect"])) {
+                        $redirect = htmlspecialchars($_GET["redirect"]);
+                        echo "<input type='hidden' value='{$redirect}' name='redirect'>";
+                    }
+                ?>
                 <input type="text" placeholder="Nome utente" name="username" required>
                 <input type="password" placeholder="Password" name="password" required>
                 <button type="submit" id="action-submit" name="account">ACCEDI</button>
@@ -100,7 +106,10 @@
 
                         if (isset($id)) {
                             login($id);
-                            header("Location: " . "index.php");
+                            $location = "index.php";
+                            if (isset($_POST["redirect"]))
+                                $location = $_POST["redirect"];
+                            header("Location: " . $location);
                         }
                     }
                 }
