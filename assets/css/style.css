@@ -4,15 +4,14 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 
 :root {
-    --main-color: #152235;
+    --main-color: #00060e3b;
 
     --text-color: #000000;
     --font-family: "Pliant", sans-serif;
 }
-/*
 *::-webkit-scrollbar {
     display: none;
-}*/
+}
 textarea:focus, input:focus{
     outline: none;
 }
@@ -31,19 +30,26 @@ p {
 
 
 .navbar {
-    & {
-        gap: 20px;
-        padding: 6px 75px;
-        border-bottom: 2.5px solid #142B51;
-        background-color: var(--main-color);
+    &  {
+        box-sizing: border-box;
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
 
-        background-image: url('../images/ui/ocean.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
+        padding: 15px 40px 20px;
+        width: 100%;
+
+        background: var(--main-color);
+        background: linear-gradient(0deg, #00000000 0%, #2c2c2c57 40%, #000000ad 100%);
 
         display: grid;
         grid-template-columns: 1fr auto 1fr;
-        align-items: center;
+        gap: 20px;
+
+        mask: linear-gradient(#000, #000, #000, #ffffff00);
+        backdrop-filter: blur(1.5px);
     }
     @media (max-width: 1010px) { 
         & {
@@ -57,7 +63,7 @@ p {
             grid-auto-flow: column;
             grid-template-columns: inherit;
             align-items: center;
-            gap: 50px;
+            gap: 60px;
 
             text-align: center;
         }
@@ -68,7 +74,7 @@ p {
         }
 
         a {
-            --font-size: 1.15rem;
+            --font-size: 1.1rem;
             --font-color: #fff;
             --active-color: #1867fc;
             --hover-color: #1b86eb;
@@ -77,13 +83,13 @@ p {
                 font-weight: 400;
                 font-size: var(--font-size);
                 color: var(--font-color);
-                text-shadow: 0 0 5px #000;
+                text-shadow: 0 0 5px #3e3e3e;
                 text-decoration: none;
 
                 border-bottom: 3px solid;
                 border-color: #ffffff00;
                 border-radius: 2px;
-                padding: 10px 0;
+                padding: 5px 0;
                 margin-top: 5px;
 
                 transition: .35s;
@@ -171,7 +177,7 @@ p {
 .content {
     & {
         width: 100%;
-        min-height: 90vh;
+        min-height: 100vh;
     }
 }
 
@@ -182,7 +188,6 @@ p {
         background-color: var(--bg-color);
         
         padding: 15px 150px;
-        margin-top: 50px;
     }
     @media (max-width: 1010px) {
         & {
@@ -199,7 +204,7 @@ p {
     }
 
     .infopoint {
-        --font-size-tit: 1.2rem;
+        --font-size-tit: 1.1rem;
         --font-size-el: 0.45rem;
         --text-color: #ffffff;
 
