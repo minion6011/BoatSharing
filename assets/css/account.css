@@ -1,7 +1,7 @@
 body, html {
     background-color: #dae4f6;
 
-    background-image: url('../images/ui/sea.png');
+    background-image: url('../images/ui/sea.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -31,13 +31,13 @@ body, html {
 
         .title {
             color: #fff;
-            text-shadow: 0px 0px 5px #000;
+            text-shadow: 0px 0px 5px #a2a2a2;
             font-weight: 500;
             font-size: 1.3rem;
         }
 
         & > div {
-            --box-shadow-color: #fff;
+            --box-shadow-color: #d5d5d5;
             --box-shadow-size: 10px;
 
             & {
@@ -63,8 +63,9 @@ body, html {
                     row-gap: 5px;
 
                     background-color: #fff;
+
                     padding: 20px 70px;
-                    border-radius: 7.5px;
+                    border-radius: 10px;
 
                     box-shadow: 0px 0px var(--box-shadow-size) var(--box-shadow-color);
                 }
@@ -80,6 +81,7 @@ body, html {
                         width: 50px;
                         border-radius: 150px;
                         border: 1.5px solid #EBEBEB;
+                        background-color: #fff;
                     }
 
                     .colorpicker {
@@ -198,7 +200,7 @@ body, html {
                         transition: box-shadow .5s;
                     }
                     &:hover {
-                        box-shadow: 0px 0px var(--box-shadow-size) #6d6d6d;
+                        box-shadow: 0px 0px var(--box-shadow-size) #ababab;
                     }
                     @media (max-width: 1010px) { 
                         & {
