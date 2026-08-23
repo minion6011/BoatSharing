@@ -8,45 +8,34 @@
     <link rel="icon" href="assets/images/ui/logo.svg"/>
     
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/catalog.css">
 </head>
 <body>
     <?php
         include("components/navbar.php")
     ?>
 
-    <h1 style="
-        position: fixed;
-        top: 0;
-        left: 50%;
-        z-index: 3;
-        transform: translate(-50%, -50%);
-        color: #fff;
-    ">H</h1>
-
     <div class="content">
-        <div class="presentation">
-            <img src="assets/images/ui/presentation.jpg">
-            <text>
-                Esplora le acque con la <b>barca dei tuoi sogni. <br>
-                BoatSharing</b>, il modo più facile per navigare
-            </text>
+        <div class="search">
+            <select name="type">
+                <option value="name">Nome barca</option>
+                <option value="start">Partenza</option>
+                <option value="start_cap">CAP</option>
+                <option value="destination">Destinazione</option>
+            </select>
+            <input type="text">
+            <button type="submit">
+                <i class="fa fa-search"></i>
+            </button>
         </div>
 
-        <div class="side-sep">
-            <p class="title">In Evidenza</p>
-            <a class="link" href="catalog.php">
-                Vedi tutti
-                <i class="fa fa-arrow-right"></i>
-            </a>
-        </div>
         <div class="boats">
             <?php
                 require_once "main.php";
 
                 $imgpath = $ini["Paths"]["boatimgs"];
 
-                $sql = "SELECT * FROM boats ORDER BY id LIMIT 4";
+                $sql = "SELECT * FROM boats ORDER BY id LIMIT 50";
                 $result = $conn -> query($sql);
 
                 foreach ($result->fetchAll() as $row) {

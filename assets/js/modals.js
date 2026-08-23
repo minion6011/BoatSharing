@@ -92,7 +92,6 @@ function openModalDefault(modalElement) {
     modalElement.classList.add("open");
 
     currentModal = modalElement;
-    modalElement.value = name;
 }
 
 /** 
