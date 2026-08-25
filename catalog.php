@@ -16,29 +16,50 @@
     ?>
 
     <div class="content">
-        <div class="search">
-            <select name="type">
-                <option value="name">Nome barca</option>
-                <option value="start">Partenza</option>
-                <option value="start_cap">CAP</option>
-                <option value="destination">Destinazione</option>
-            </select>
-            <input type="text">
-            <button type="submit">
-                <i class="fa fa-search"></i>
-            </button>
-        </div>
+        <form action='catalog.php' method='GET'>
+            <div class="search">
+                <select name="type" required>
+                    <option value="name">Nome barca</option>
+                    <option value="start_city">Partenza</option>
+                    <option value="start_cap">CAP</option>
+                    <option value="destination">Destinazione</option>
+                </select>
+                <input type="text" name="content" minlength="5">
+                <button type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </form>
 
         <div class="boats">
             <?php
                 require_once "main.php";
 
+                // Search
+
+                $searchquery = "";
+                $params = [];
+                $valid_methods = ["name", "start_city", "start_cap", "destination"];
+
+                if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                    if (isset($_GET["type"]) && isset($_GET["content"])) {
+                        if (in_array($_GET["type"], $valid_methods, true)) {
+                            $searchquery = "WHERE {$_GET['type']} LIKE :content ";
+                            $params[':content'] = '%' . $_GET['content'] . '%';
+                        }
+                    }
+                }
+
+                // Data display
+
                 $imgpath = $ini["Paths"]["boatimgs"];
 
-                $sql = "SELECT * FROM boats ORDER BY id LIMIT 50";
-                $result = $conn -> query($sql);
+                $sql = "SELECT * FROM boats " . $searchquery . "ORDER BY id LIMIT 50";
 
-                foreach ($result->fetchAll() as $row) {
+                $stmt = $conn -> prepare($sql);
+                $stmt -> execute($params);
+
+                foreach ($stmt->fetchAll() as $row) {
                     echo "
                         <div class='card'>
                             <img src='{$imgpath}{$row['img']}'>

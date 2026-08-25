@@ -139,7 +139,7 @@
                 <div class="boats">
 
                     <?php 
-                        // To-Do: Add Paginator
+                        // To-Do: Add Paginator or limit to 100 boats
                         foreach ($boats as $row) {
                             echo "
                                 <div class='card'>

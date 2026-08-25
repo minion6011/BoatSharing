@@ -15,15 +15,6 @@
         include("components/navbar.php")
     ?>
 
-    <h1 style="
-        position: fixed;
-        top: 0;
-        left: 50%;
-        z-index: 3;
-        transform: translate(-50%, -50%);
-        color: #fff;
-    ">H</h1>
-
     <div class="content">
         <div class="presentation">
             <img src="assets/images/ui/presentation.jpg">

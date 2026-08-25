@@ -34,9 +34,18 @@ body, html {
             
             background-color: #ebf1fb;
         }
+        select {
+            & {
+                cursor: pointer;
+            }
+            &:focus {
+                outline: none;
+            }
+        }
         button {
             & {
-                background-color: #4597f1;
+                background-color: #1f85f2;
+                cursor: pointer;
 
                 height: 100%;
                 padding: 7.5px;
@@ -44,6 +53,11 @@ body, html {
 
                 border-radius: 15px;
                 aspect-ratio: 1 / 1;
+
+                transition: .25s;
+            }
+            &:hover {
+                background-color: #71aeef;
             }
             i.fa {
                 color: #fff;
