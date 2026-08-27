@@ -1,6 +1,8 @@
 <script src="assets/js/navbar.js" type="text/javascript" defer></script>
 <div class="navbar">
-    <img class="logo-adp">
+    <a href="index.php">
+        <img class="logo-adp">
+    </a>
     <div class="links" id="nav-link">
         <a href="catalog.php">Esplora</a>
         <a href="index.php">Home</a>

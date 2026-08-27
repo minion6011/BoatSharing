@@ -76,12 +76,17 @@
                                     <p>{$row['destination']}</p>
                                 </div>
 
-                                <input type='hidden' value='{$row['userid']}' name='userid'>
+                                <form action='chat.php' method='POST'>
+                                    <input type='hidden' name='_method' value='POST'>
+                                    
+                                    <input type='hidden' value='{$row['id']}' name='id'>
+                                    <input type='hidden' value='{$row['userid']}' name='userid'>
 
-                                <button>
-                                    <i class='fa fa-phone'></i>
-                                    Contatta
-                                </button>
+                                    <button type='submit'>
+                                        <i class='fa fa-phone'></i>
+                                        Contatta
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     ";

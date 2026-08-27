@@ -110,6 +110,7 @@
                             if (isset($_POST["redirect"]))
                                 $location = $_POST["redirect"];
                             header("Location: " . $location);
+                            exit;
                         }
                     }
                 }

@@ -7,13 +7,13 @@
 <?php // Post Request
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $userid = $_SESSION["user_id"];
-        //requireLogin($conn);
+
         $username = htmlspecialchars($_POST["username"], ENT_QUOTES);
         $password = $_POST["password"];
         $color_num = mb_substr($_POST["color"], 1); // #fff -> to -> fff
         $color = isset($color_num) ? preg_replace('/[^a-fA-F0-9]/', '', $color_num) : '000000';
         $id = $_SESSION["user_id"];
-        // To-Do: Add controll for $username, %color
+        
         if (empty($password)) {
             $sql = "UPDATE users SET user = :user, color = :color WHERE id = :id";
             $stmt = $conn -> prepare($sql);
@@ -34,6 +34,7 @@
         }
         
         header("Location: " . "account.php");
+        exit;
     }
 ?>
 
@@ -86,41 +87,101 @@
             "id" => $_SESSION["user_id"],
         ]);
 
-        $result = $stmt -> fetch(PDO::FETCH_OBJ);
+        $account = $stmt -> fetch(PDO::FETCH_OBJ);
     ?>
 
     <div class="content">
         <div class="menu">
-            <div>
-                <p class="title">Account</p>
-                <form action='account.php' method='POST'>
-                    <div class="account">
-                        <?php
-                            echo "
-                                <div class='ico'>
-                                    <img class='userico' src='components/avatar.php?color={$result->color}'>
+            <div class="container">
+                <div class="box">
+                    <p class="title">Account</p>
+                    <div class="account" id="account-card">
+                        <form action='account.php' method='POST'>
+                            <?php
+                                    echo "
+                                        <div class='ico'>
+                                            <img class='userico' src='components/avatar.php?color={$account->color}'>
 
-                                    <button type='button' class='colorpicker' id='btncolor'>
-                                        <input type='color' name='color' value='#{$result->color}' id='inputcolor'>
-                                        <img id='svgcolor' src='assets/images/ui/ink.svg'>
-                                    </button>
-                                </div>
+                                            <button type='button' class='colorpicker' id='btncolor'>
+                                                <input type='color' name='color' value='#{$account->color}' id='inputcolor'>
+                                                <img id='svgcolor' src='assets/images/ui/ink.svg'>
+                                            </button>
+                                        </div>
 
-                                <div class='inputs'>
-                                    <label for='username'>Username</label>
-                                    <input type='text' placeholder='{$result->user}' value='{$result->user}' name='username' required>
-                                    
-                                    <label for='password'>Password</label>
-                                    <input type='password' placeholder='password' name='password'>
-                                </div>
-                                <button type='submit' name='modify'>Modifica</button>
-                            ";
-                        ?>
+                                        <div class='inputs'>
+                                            <label for='username'>Username</label>
+                                            <input type='text' placeholder='{$account->user}' value='{$account->user}' name='username' required>
+                                            
+                                            <label for='password'>Password</label>
+                                            <input type='password' placeholder='password' name='password'>
+                                        </div>
+                                        <button type='submit' name='modify'>Modifica</button>
+                                    ";
+                            ?>
+                        </form>
                     </div>
-                </form>
+                </div>
+                
+
+                <?php 
+                    $sql = "
+                        SELECT 
+                            c.id AS chatid,
+                            b.name AS boatname,
+                            b.img AS boatimg,
+                            c.timestamp
+                        FROM chat_participants cp
+                        JOIN chats c ON cp.chatid = c.id
+                        JOIN boats b ON c.boatid = b.id
+                        WHERE cp.userid = :userid;
+                    ";
+                    $stmt = $conn -> prepare($sql);
+                    $stmt -> execute([
+                        "userid" => $_SESSION["user_id"],
+                    ]);
+
+                    $chats = $stmt -> fetchAll(PDO::FETCH_OBJ);
+                ?>
+
+                <div class="box"
+                    <?php 
+                        if (isset($chats) && count($chats) == 0) {
+                            echo " style='display: none;'";
+                    } ?>
+                >
+                    <p class="title">Chat</p>
+                    <div class="chats" id="chats-card">
+                        <div class="list">
+                            <?php
+                                $imgpath = $ini["Paths"]["boatimgs"];
+
+                                foreach ($chats as $row) {
+                                    echo "
+                                        <a href='chat.php?id={$row->chatid}'>
+                                            <div class='chat'>
+                                                <img class='boat' src='{$imgpath}{$row->boatimg}'>
+                                                <div class='texts'>
+                                                    <p class='name'>{$row->boatname} - {$row->chatid}</p>
+                                                    <p class='time'>Creata in data: {$row->timestamp}</p>
+                                                    <form action='chat.php' method='POST'>
+                                                        <input type='hidden' name='_method' value='DELETE'>
+                                                        <input type='hidden' name='chatid' value='{$row->chatid}'>
+                                                        <button>
+                                                            <img class='ico' src='assets/images/ui/delete.svg'>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    ";
+                                }
+                            ?>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div>
+            <div class="box">
                 <?php
                     $imgpath = $ini["Paths"]["boatimgs"];
         

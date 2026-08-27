@@ -28,3 +28,25 @@ colorinput.addEventListener("input", () => {
 });
 
 checkColor();
+
+
+
+const accountCard = document.getElementById("account-card");
+const chatsCard = document.getElementById("chats-card")
+
+/**
+ * Sets the parent height as the max height for every child element
+ * @param {HTMLElement} parent 
+ * @param  {HTMLElement} childs 
+ */
+function setHeight(parent, ...childs) {
+    const parentHeight = parent.offsetHeight;
+    childs.forEach(child => {
+        child.style.height = parentHeight + "px";
+    }); 
+    return parentHeight + "px";
+}
+
+window.addEventListener("load", () => {
+    setHeight(accountCard, chatsCard)
+})

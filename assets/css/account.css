@@ -36,10 +36,15 @@ body, html {
             font-size: 1.3rem;
         }
 
-        & > div {
-            --box-shadow-color: #d5d5d5;
-            --box-shadow-size: 10px;
+        .container {
+            & {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 15px
+            }
+        }
 
+        .box {
             & {
                 display: flex;
                 flex-direction: column;
@@ -54,6 +59,10 @@ body, html {
                 --inputs-width: 100px;
 
                 & {
+                    height: max-content;
+                }
+                
+                form {
                     min-width: 60px;
 
                     display: flex;
@@ -66,8 +75,6 @@ body, html {
 
                     padding: 20px 70px;
                     border-radius: 10px;
-
-                    box-shadow: 0px 0px var(--box-shadow-size) var(--box-shadow-color);
                 }
                 .ico {
                     & {
@@ -156,6 +163,112 @@ body, html {
                     }
                 }
             }
+
+            .chats {
+                & {
+                    box-sizing: border-box;
+
+                    min-width: 60px;
+                    background-color: #fff;
+
+                    border-radius: 10px;
+
+                    overflow: hidden;
+                }
+                .list {
+                    & {
+                        display: flex;
+                        align-items: center;
+                        flex-direction: column;
+
+                        row-gap: 12.5px;
+
+                        padding: 20px 20px;
+                        overflow-y: auto;
+
+                        height: 100%
+                    }
+
+                    &::-webkit-scrollbar {
+                        width: 7.5px;
+                    }
+                    &::-webkit-scrollbar-track {
+                        background: #3184be52; 
+                        cursor: pointer;
+                    }
+                    &::-webkit-scrollbar-thumb {
+                        background: #ffffff99;
+                        border-radius: 10px;
+                        cursor: pointer;
+                    }
+
+                    a:last-child {
+                        margin-bottom: 40px;
+                    }
+                    .chat {
+                        & {
+                            display: flex;
+
+                            background-color: #0000000f;
+                            border-radius: 10px;
+
+                            width: 100%;
+
+                            cursor: pointer;
+                        }
+                        .boat {
+                            width: 125px;
+                            height: 80px;
+                            border-radius: 10px;
+                        }
+                        .texts {
+                            & {
+                                display: flex;
+                                flex-direction: column;
+
+                                margin: 7.5px;
+                            }
+                            .name {
+                                font-weight: 450;
+                                font-size: 1.1rem;
+                            }
+                            .time {
+                                color: #929292;
+                                font-size: 0.8rem;
+                            }
+
+                            button {
+                                & {
+                                    margin-top: 5px;
+                                    padding: 0;
+                                    border: none;
+                                    cursor: pointer;
+                                }
+                                .ico {
+                                    filter: invert(1);
+
+                                    width: 22px;
+                                    aspect-ratio: 1 / 1;
+                                }
+                            }
+                        }
+                        @media (max-width: 1010px) { 
+                            img {
+                                width: 90px;
+                                height: 60px;
+                            }
+                            .texts {
+                                .name {
+                                    font-size: 0.9rem;
+                                }
+                                .time {
+                                    font-size: 0.6rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             
             .boats {
                 & {
@@ -163,11 +276,10 @@ body, html {
                     align-items: center;
 
                     column-gap: 10px;
-
-                    padding: var(--box-shadow-size);
-                    margin: calc(-1 * var(--box-shadow-size));
-
                     overflow-x: auto;
+
+                    padding: 0 0 10px 0;
+                    margin-top: 0;
                 }
                 &::-webkit-scrollbar {
                     height: 5px;
@@ -194,18 +306,15 @@ body, html {
                         border-radius: 10px;
                         background-color: #ffffff;
                         overflow: hidden;
-
-                        box-shadow: 0px 0px var(--box-shadow-size) var(--box-shadow-color);
-
-                        transition: box-shadow .5s;
-                    }
-                    &:hover {
-                        box-shadow: 0px 0px var(--box-shadow-size) #ababab;
+                        height: max-content;
                     }
                     @media (max-width: 1010px) { 
                         & {
                             width: 200px;
                         }
+                    }
+                    &:last-child {
+                        margin-right: 10px;
                     }
 
                     img {

@@ -30,7 +30,7 @@
                 <div class="inputbox image">
                     <p>Foto della barca</p>
                     <div class="input" id="edit-img_container">
-                        <input type="file" id="edit-img_input" name="img">
+                        <input type="file" id="edit-img_input" name="img" accept="image/jpeg, image/jpg, image/png, image/webp">
                         <div class="request">
                             <img src="assets/images/ui/addimage.svg">
                             <p>Clicca per caricare</p>
@@ -97,7 +97,7 @@
                 <div class="inputbox image">
                     <p>Foto della barca</p>
                     <div class="input" id="create-img_container">
-                        <input type="file" id="create-img_input" name="img" require>
+                        <input type="file" id="create-img_input" name="img" accept="image/jpeg, image/jpg, image/png, image/webp" require>
                         <div class="request">
                             <img src="assets/images/ui/addimage.svg">
                             <p>Clicca per caricare</p>

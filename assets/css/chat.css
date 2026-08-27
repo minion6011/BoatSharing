@@ -1,0 +1,182 @@
+body, html {
+    background-color: #c9daf9;
+
+    background-image: url('../images/ui/water.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.content {
+    & {
+        margin-top: 100px;
+    }
+    @media (max-width: 1010px) { 
+        & {
+            margin-top: 75px;
+        }
+    }
+
+    --primary-color: #aae3eb4a;
+    --secondary-color: #dcdcdc75;
+
+    --text-color: #fff;
+
+    --system-color: #334155d4;
+    --user-color: #0F172Ad4;
+    --self-color: #0369A1d4;
+
+    .chat {
+        & {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            min-height: 75vh;
+
+            border-radius: 17.5px;
+            padding: 15px;
+            margin: 35px;
+
+            background-color: var(--primary-color);
+        }
+        @media (max-width: 1010px) { 
+            & {
+                margin: 15px;
+            }
+        }
+        .controll {
+            & {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                padding: 10px;
+                border-radius: 12.5px;
+
+                background-color: var(--secondary-color);
+            }
+            .ico {
+                width: 75px;
+                height: 48px;
+
+                border-radius: 10px;
+            }
+            .name {
+                color: #fff;
+
+                font-size: 1.15rem;
+                font-weight: 450;
+            }
+        }
+
+        .messages {
+            & {
+                display: flex;
+                flex-direction: column;
+
+                flex: 1;
+
+                gap: 7.5px;
+
+                padding: 10px;
+                border-radius: 12.5px;
+
+                background-color: var(--secondary-color);
+
+                max-height: 60vh;
+
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+
+            &::-webkit-scrollbar {
+                width: 16px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: #e8e8e8;
+                border: 4px solid transparent;
+                border-radius: 8px;
+                
+                background-clip: padding-box; 
+
+                cursor: pointer;
+            }
+
+            .message {
+                --border-radius: 10px;
+
+                & {
+                    color: var(--text-color);
+                    padding: 12.5px;
+
+                    max-width: 45%;
+                    width: max-content;
+
+                    overflow-wrap: break-word;
+                }
+                
+                &.system {
+                    background-color: var(--system-color);
+
+                    border-radius: var(--border-radius);
+                    margin: 0 auto;
+
+                    text-align: center;
+                    max-width: 95%;
+                    font-size: 0.9rem;
+                }
+                &.self {
+                    background-color: var(--self-color);
+
+                    border-radius: 10px 10px 0 10px;
+                    margin-left: auto;
+                }
+                &.user {
+                    background-color: var(--user-color);
+
+                    border-radius: 10px 10px 10px 0;
+                    margin-right: auto;
+                }
+            }
+        }
+
+        .input {
+            & {
+                display: flex;
+                gap: 10px;
+
+                padding: 10px;
+                border-radius: 12.5px;
+
+                background-color: var(--secondary-color);
+            }
+            input {
+                flex: 1;
+
+                font-size: 0.9rem;
+
+                border: 0;
+                border-radius: 10px;
+                padding: 7.5px;
+                
+                background-color: #fff;
+
+                width: 100%;
+            }
+            button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                width: 33px;
+                aspect-ratio: 1 / 1;
+
+                background-color: #fff;
+                border: 0;
+                border-radius: 10px;
+
+                cursor: pointer;
+            }
+        }
+    }
+}
