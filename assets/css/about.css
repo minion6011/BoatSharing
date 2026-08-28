@@ -1,0 +1,47 @@
+body, html {
+    background-color: #b3f4ff;
+
+    background-image: url('../images/ui/waves.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+b, strong {
+    color: #034ea7;
+    font-weight: 600;
+}
+
+.content {
+    & {
+        display: flex;
+        justify-content: center;
+
+        margin-top: 100px;
+    }
+    @media (max-width: 1010px) { 
+        & {
+            margin-top: 75px;
+        }
+    }
+
+    i.fa {
+        margin-right: 2.5px;
+    }
+
+    .text {
+        & {
+            background-color: #ffffffb5;
+            backdrop-filter: blur(1.5px);
+
+            border-radius: 10px;
+
+            padding: 20px;
+            width: 60%;
+        }
+        @media (max-width: 1010px) { 
+            & {
+                width: 80%;
+            }
+        }
+    }
+}

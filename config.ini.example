@@ -1,0 +1,14 @@
+[DB]
+servername = ""
+dbname  = ""
+
+username = ""
+password = ""
+
+maximagesize = 20971520
+
+[Paths]
+boatimgs = "assets/images/boats/"
+                
+[Support]
+email = ""
