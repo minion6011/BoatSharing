@@ -62,7 +62,7 @@
                 foreach ($stmt->fetchAll(PDO::FETCH_OBJ) as $row) {
             ?>
                 <div class='card'>
-                    <img src='<?= $imgpath . $row->img  ?>'>
+                    <img src='<?= $imgpath . $row->img  ?>' alt='Foto barca'>
                     <div class='infos'>
                         <p class='name'><?= $row->name ?></p>
 

@@ -98,11 +98,11 @@
                     <div class="account" id="account-card">
                         <form action='account.php' method='POST'>
                             <div class='ico'>
-                                <img class='userico' src='components/avatar.php?color=<?= $account->color ?>'>
+                                <img class='userico' src='components/avatar.php?color=<?= $account->color ?>' alt="Barca a vela">
 
                                 <button type='button' class='colorpicker' id='btncolor'>
                                     <input type='color' name='color' value='#<?= $account->color ?>' id='inputcolor'>
-                                    <img id='svgcolor' src='assets/images/ui/ink.svg'>
+                                    <img id='svgcolor' src='assets/images/ui/ink.svg' alt="Seleziona colore">
                                 </button>
                             </div>
 
@@ -155,7 +155,7 @@
                             ?>
                                 <a href='chat.php?id=<?= $row->chatid; ?>'>
                                     <div class='chat'>
-                                        <img class='boat' src='<?= $imgpath . $row->boatimg ?>'>
+                                        <img class='boat' src='<?= $imgpath . $row->boatimg ?>' alt='Foto barca'>
                                         <div class='texts'>
                                             <p class='name'><?= $row->boatname . ' - ' . $row->chatid ?></p>
                                             <p class='time'>Creata in data: <?= $row->timestamp ?></p>
@@ -163,7 +163,7 @@
                                                 <input type='hidden' name='_method' value='DELETE'>
                                                 <input type='hidden' name='chatid' value='<?= $row->chatid ?>'>
                                                 <button>
-                                                    <img class='ico' src='assets/images/ui/delete.svg'>
+                                                    <img class='ico' src='assets/images/ui/delete.svg' alt="Elimina chat">
                                                 </button>
                                             </form>
                                         </div>
@@ -200,7 +200,7 @@
                         foreach ($boats as $row) {
                     ?>
                         <div class='card'>
-                            <img src='<?= $imgpath . $row->img ?>'>
+                            <img src='<?= $imgpath . $row->img ?>' alt='Foto barca'>
                             <div class='infos'>
                                 <p class='name'><?= $row->name ?></p>
 
@@ -220,7 +220,7 @@
 
                                         data-id='<?= $row->id ?>'
                                     >
-                                        <img src='assets/images/ui/delete.svg'>
+                                        <img src='assets/images/ui/delete.svg' alt="Elimina barca">
                                     </button>
                                     <button 
                                         class='edit' 
@@ -233,7 +233,7 @@
                                         data-start_cap='<?= $row->start_cap ?>'
                                         data-destination='<?= $row->destination ?>'
                                     >
-                                        <img src='assets/images/ui/edit.svg'>
+                                        <img src='assets/images/ui/edit.svg' alt="Modifica barca">
                                     </button>
                                 </div>
                             </div>

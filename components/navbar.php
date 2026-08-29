@@ -1,7 +1,7 @@
 <script src="assets/js/navbar.js" type="text/javascript" defer></script>
 <div class="navbar">
     <a href="index.php">
-        <img class="logo-adp">
+        <img class="logo-adp" alt="Ancora seguita dalla scritta BoatSharing, Logo del sito">
     </a>
     <div class="links" id="nav-link">
         <a href="catalog.php">Esplora</a>
@@ -30,13 +30,13 @@
 
                 echo "
                 <a href='account.php'>
-                    <img src='components/avatar.php?color=$result->color' class='account'>
+                    <img src='components/avatar.php?color=$result->color' class='account' alt='Barca a vela'>
                 </a>
                 ";
             } else {
                 echo "
                 <a href='login.php'>
-                    <img src='assets/images/ui/add.svg' class='account'>
+                    <img src='assets/images/ui/add.svg' class='account' alt='Barca a vela'>
                 </a>
                 ";
             }

@@ -20,7 +20,7 @@
     <div class="content">
         <div class="login">
             <div class="title" style="--text-color: #ffffff;">
-                <img src="assets/images/ui/logo.svg" class="logo">
+                <img src="assets/images/ui/logo.svg" class="logo" alt="Ancora, Logo del sito">
                 <p>Accedi a BoatSharing</p>
             </div>
             <form action="login.php" method="POST">

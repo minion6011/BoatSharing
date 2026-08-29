@@ -8,7 +8,7 @@
             <input type="hidden" name="_method" value="PATCH">
     
             <div class="top">
-                <img src="components/avatar.php?color=ffffff" class="logo">
+                <img src="components/avatar.php?color=ffffff" class="logo" alt="Barca a vela">
                 <div class="text">
                     <p class="title">Modifica la tua imbarcazione</p>
                     <p class="description">Aggiorna le informazioni della tua imbarcazione</p>
@@ -22,7 +22,7 @@
                 <div class="inputbox text">
                     <p>Nome barca</p>
                     <div class="input">
-                        <img src="components/avatar.php?color=989898">
+                        <img src="components/avatar.php?color=989898" alt="Barca a vela">
                         <input type="text" minlength="5" placeholder="Inserire nome barca" id="edit-name" name="name" required>
                     </div>
                 </div>
@@ -32,10 +32,10 @@
                     <div class="input" id="edit-img_container">
                         <input type="file" id="edit-img_input" name="img" accept="image/jpeg, image/jpg, image/png, image/webp">
                         <div class="request">
-                            <img src="assets/images/ui/addimage.svg">
+                            <img src="assets/images/ui/addimage.svg" alt="Simbolo del più">
                             <p>Clicca per caricare</p>
                         </div>
-                        <img class="upload" id="edit-img">
+                        <img class="upload" id="edit-img" img="Immagine caricata">
                     </div>
                 </div>
 
@@ -77,7 +77,7 @@
             <input type="hidden" name="_method" value="POST">
     
             <div class="top">
-                <img src="components/avatar.php?color=ffffff" class="logo">
+                <img src="components/avatar.php?color=ffffff" class="logo" alt="Barca a vela">
                 <div class="text">
                     <p class="title">Aggiungi la tua barca</p>
                     <p class="description">Inserisci i dettagli della tua barca per inziare a condividerla</p>
@@ -89,7 +89,7 @@
                 <div class="inputbox text">
                     <p>Nome barca</p>
                     <div class="input">
-                        <img src="components/avatar.php?color=989898">
+                        <img src="components/avatar.php?color=989898" alt="Barca a vela">
                         <input type="text" minlength="5" placeholder="Inserire nome barca" name="name" required>
                     </div>
                 </div>
@@ -99,10 +99,10 @@
                     <div class="input" id="create-img_container">
                         <input type="file" id="create-img_input" name="img" accept="image/jpeg, image/jpg, image/png, image/webp" require>
                         <div class="request">
-                            <img src="assets/images/ui/addimage.svg">
+                            <img src="assets/images/ui/addimage.svg" alt="Simbolo del più">
                             <p>Clicca per caricare</p>
                         </div>
-                        <img class="upload" id="create-img">
+                        <img class="upload" id="create-img" alt="Immagine caricata">
                     </div>
                 </div>
 
@@ -144,7 +144,7 @@
             <input type="hidden" name="_method" value="DELETE">
     
             <div class="top">
-                <img src="components/avatar.php?color=ffffff" class="logo">
+                <img src="components/avatar.php?color=ffffff" class="logo" alt="Barca a vela">
                 <div class="text">
                     <p class="title">Rimuovi la tua barca</p>
                     <p class="description">Cancella la tua barca dai nostri database</p>

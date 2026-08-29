@@ -202,7 +202,7 @@
 
         <div class="chat">
             <div class="controll">
-                <img src='<?= $imgpath . $chatdata->boatimg ?>' class='ico'>
+                <img src='<?= $imgpath . $chatdata->boatimg ?>' class='ico' alt='Foto barca'>
                 <p class='name'><?= $chatdata->boatname . " - " . $chatid ?></p>
             </div>
 

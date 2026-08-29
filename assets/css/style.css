@@ -405,6 +405,7 @@ a {
 
 .logo-adp { /* Logo Adaptive */
     & {
+        max-height: 55px;
         height: 55px;
 
         object-position: left;

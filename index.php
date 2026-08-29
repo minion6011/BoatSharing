@@ -17,10 +17,10 @@
 
     <div class="content">
         <div class="presentation">
-            <img src="assets/images/ui/presentation.jpg">
+            <img src="assets/images/ui/presentation.jpg" alt="Molte barche e yacht in navigazione su acque blu profonde">
             <text>
                 Esplora le acque con la <b>barca dei tuoi sogni. <br>
-                BoatSharing</b>, il modo più facile per navigare
+                BoatSharing</b>, il modo più facile per navigare.
             </text>
         </div>
 
@@ -43,7 +43,7 @@
                 foreach ($result->fetchAll(PDO::FETCH_OBJ) as $row) {
             ?>
                 <div class='card'>
-                    <img src='<?= $imgpath . $row->img; ?>'>
+                    <img src='<?= $imgpath . $row->img; ?>' alt='Foto barca'>
                     <div class='infos'>
                         <p class='name'><?= $row->name; ?></p>
 
