@@ -39,7 +39,7 @@
                     ]);
 
                     //var_dump(http_response_code(200));
-                    header("Location: " . "account.php");
+                    header("Location: account.php");
                     break;
                 } catch(PDOException $e) {
                     echo $sql . "<br>" . $e->getMessage();
@@ -57,7 +57,7 @@
 
                     if ($userid == $currentuserid) {
                         http_response_code(409);
-                        header("Location: " . "index.php");
+                        header("Location: index.php");
                         exit;
                     }
 
@@ -79,7 +79,7 @@
                         "useridA" => $userid,
                         "useridB" => $currentuserid
                     ]);
-                    header("Location: " . "chat.php?id=" . urlencode($chatid));
+                    header("Location: chat.php?id=" . urlencode($chatid));
                     exit;
                 } catch(PDOException $e) {
                     echo $e->getMessage();
@@ -125,7 +125,7 @@
                     http_response_code(400);
                     exit;
                 }
-                header("Location: " . "chat.php?id=" . urlencode($chatid));
+                header("Location: chat.php?id=" . urlencode($chatid));
                 exit;
         }
     }
@@ -202,15 +202,14 @@
 
         <div class="chat">
             <div class="controll">
-                <?php
-                    echo "<img src='{$imgpath}{$chatdata->boatimg}' class='ico'>"; 
-                    echo "<p class='name'>{$chatdata->boatname} - {$chatid}</p>";
-                ?>
+                <img src='<?= $imgpath . $chatdata->boatimg ?>' class='ico'>
+                <p class='name'><?= $chatdata->boatname . " - " . $chatid ?></p>
             </div>
 
            <div class="messages" id="messages">
+                
+                <p class='message system'>Questo è l'inizio della vostra conversazione<br><?= $chatdata->timestamp ?></p>
                 <?php 
-                    echo "<p class='message system'>Questo è l'inizio della vostra conversazione<br>{$chatdata->timestamp}</p>";
                     foreach ($messagesdata as $message) {
                         if ($message->userid == $_SESSION["user_id"]) {
                             echo "<p class='message self'>{$message->content}</p>";
@@ -225,9 +224,7 @@
                 <input type="hidden" name="_method" value="PUT">
 
                 <input type="text" placeholder="Invia un messaggio in chat..." name="content">
-                <?php
-                    echo "<input type='hidden' name='chatid' value={$_GET['id']}>";
-                ?>
+                <input type='hidden' name='chatid' value=<?= $_GET['id'] ?>>
                 <button type="submit">
                     <i class="fa fa-paper-plane"></i>
                 </button>

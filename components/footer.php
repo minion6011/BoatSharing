@@ -18,7 +18,7 @@
     </div>
     <hr>
     <div class="socials">
-        <a class="https://github.com/minion6011">
+        <a href="https://github.com/minion6011" target="_blank" rel="noopener noreferrer">
             <i class="fa fa-github fa-3"></i>
         </a>
     </div>

@@ -59,37 +59,37 @@
                 $stmt = $conn -> prepare($sql);
                 $stmt -> execute($params);
 
-                foreach ($stmt->fetchAll() as $row) {
-                    echo "
-                        <div class='card'>
-                            <img src='{$imgpath}{$row['img']}'>
-                            <div class='infos'>
-                                <p class='name'>{$row['name']}</p>
+                foreach ($stmt->fetchAll(PDO::FETCH_OBJ) as $row) {
+            ?>
+                <div class='card'>
+                    <img src='<?= $imgpath . $row->img  ?>'>
+                    <div class='infos'>
+                        <p class='name'><?= $row->name ?></p>
 
-                                <div class='location'>
-                                    <i class='fa fa-map-marker'></i>
-                                    <p>{$row['start_city']}, {$row['start_cap']}</p>
-                                </div>
-
-                                <div class='location'>
-                                    <i class='fa fa-angle-double-right'></i>
-                                    <p>{$row['destination']}</p>
-                                </div>
-
-                                <form action='chat.php' method='POST'>
-                                    <input type='hidden' name='_method' value='POST'>
-                                    
-                                    <input type='hidden' value='{$row['id']}' name='id'>
-                                    <input type='hidden' value='{$row['userid']}' name='userid'>
-
-                                    <button type='submit'>
-                                        <i class='fa fa-phone'></i>
-                                        Contatta
-                                    </button>
-                                </form>
-                            </div>
+                        <div class='location'>
+                            <i class='fa fa-map-marker'></i>
+                            <p><?= $row->start_city . ", " . $row->start_cap ?></p>
                         </div>
-                    ";
+
+                        <div class='location'>
+                            <i class='fa fa-angle-double-right'></i>
+                            <p><?= $row->destination ?></p>
+                        </div>
+
+                        <form action='chat.php' method='POST'>
+                            <input type='hidden' name='_method' value='POST'>
+                            
+                            <input type='hidden' value='<?= $row->id ?>' name='id'>
+                            <input type='hidden' value='<?= $row->userid ?>' name='userid'>
+
+                            <button type='submit'>
+                                <i class='fa fa-phone'></i>
+                                Contatta
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            <?php
                 }
             ?>
         </div>

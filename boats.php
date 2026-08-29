@@ -55,7 +55,7 @@
                 http_response_code(400);
                 exit;
             }
-            header("Location: " . "account.php");
+            header("Location: account.php");
             break;
         case 'PATCH': // Edit
             $imgStatus = validateImg($_FILES["img"], $ini["DB"]["maximagesize"]);
@@ -129,7 +129,7 @@
             }
             
             //var_dump(http_response_code(200));
-            header("Location: " . "account.php");
+            header("Location: account.php");
             break;
         case 'DELETE': // Delete
             $id = $_POST["id"];
@@ -161,7 +161,7 @@
             ]);
 
             //var_dump(http_response_code(200));
-            header("Location: " . "account.php");
+            header("Location: account.php");
             break;
         default:
             http_response_code(405); // Method Not Allowed

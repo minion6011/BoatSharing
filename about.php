@@ -123,9 +123,7 @@
                 <p>Puoi scriverci un'email al seguente indirizzo (clicca sul link per aprire il tuo client di posta):</p>
                 <ul>
                     <li><b>Email Assistenza:</b> 
-                    <?php 
-                        echo "<a href='mailto:{$ini['Support']['email']}'>{$ini['Support']['email']}</a></li>";
-                    ?>
+                        <a href='mailto:<?= $ini['Support']['email'] ?>'><?= $ini['Support']['email'] ?></a></li>
                 </ul>
                 <p><small><em>Nota: Il team di supporto risponderà il prima possibile. Non sono previsti recapiti telefonici o chat di assistenza live.</em></small></p>
             </section>

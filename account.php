@@ -33,7 +33,7 @@
             ]);
         }
         
-        header("Location: " . "account.php");
+        header("Location: account.php");
         exit;
     }
 ?>
@@ -97,27 +97,23 @@
                     <p class="title">Account</p>
                     <div class="account" id="account-card">
                         <form action='account.php' method='POST'>
-                            <?php
-                                    echo "
-                                        <div class='ico'>
-                                            <img class='userico' src='components/avatar.php?color={$account->color}'>
+                            <div class='ico'>
+                                <img class='userico' src='components/avatar.php?color=<?= $account->color ?>'>
 
-                                            <button type='button' class='colorpicker' id='btncolor'>
-                                                <input type='color' name='color' value='#{$account->color}' id='inputcolor'>
-                                                <img id='svgcolor' src='assets/images/ui/ink.svg'>
-                                            </button>
-                                        </div>
+                                <button type='button' class='colorpicker' id='btncolor'>
+                                    <input type='color' name='color' value='#<?= $account->color ?>' id='inputcolor'>
+                                    <img id='svgcolor' src='assets/images/ui/ink.svg'>
+                                </button>
+                            </div>
 
-                                        <div class='inputs'>
-                                            <label for='username'>Username</label>
-                                            <input type='text' placeholder='{$account->user}' value='{$account->user}' name='username' required>
-                                            
-                                            <label for='password'>Password</label>
-                                            <input type='password' placeholder='password' name='password'>
-                                        </div>
-                                        <button type='submit' name='modify'>Modifica</button>
-                                    ";
-                            ?>
+                            <div class='inputs'>
+                                <label for='username'>Username</label>
+                                <input type='text' placeholder='<?= $account->user ?> ?>' value='<?= $account->user ?>' name='username' required>
+                                
+                                <label for='password'>Password</label>
+                                <input type='password' placeholder='password' name='password'>
+                            </div>
+                            <button type='submit' name='modify'>Modifica</button>
                         </form>
                     </div>
                 </div>
@@ -156,24 +152,24 @@
                                 $imgpath = $ini["Paths"]["boatimgs"];
 
                                 foreach ($chats as $row) {
-                                    echo "
-                                        <a href='chat.php?id={$row->chatid}'>
-                                            <div class='chat'>
-                                                <img class='boat' src='{$imgpath}{$row->boatimg}'>
-                                                <div class='texts'>
-                                                    <p class='name'>{$row->boatname} - {$row->chatid}</p>
-                                                    <p class='time'>Creata in data: {$row->timestamp}</p>
-                                                    <form action='chat.php' method='POST'>
-                                                        <input type='hidden' name='_method' value='DELETE'>
-                                                        <input type='hidden' name='chatid' value='{$row->chatid}'>
-                                                        <button>
-                                                            <img class='ico' src='assets/images/ui/delete.svg'>
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    ";
+                            ?>
+                                <a href='chat.php?id=<?= $row->chatid; ?>'>
+                                    <div class='chat'>
+                                        <img class='boat' src='<?= $imgpath . $row->boatimg ?>'>
+                                        <div class='texts'>
+                                            <p class='name'><?= $row->boatname . ' - ' . $row->chatid ?></p>
+                                            <p class='time'>Creata in data: <?= $row->timestamp ?></p>
+                                            <form action='chat.php' method='POST'>
+                                                <input type='hidden' name='_method' value='DELETE'>
+                                                <input type='hidden' name='chatid' value='<?= $row->chatid ?>'>
+                                                <button>
+                                                    <img class='ico' src='assets/images/ui/delete.svg'>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </a>
+                            <?php
                                 }
                             ?>
                         </div>
@@ -202,47 +198,47 @@
                     <?php 
                         // To-Do: Add Paginator or limit to 100 boats
                         foreach ($boats as $row) {
-                            echo "
-                                <div class='card'>
-                                    <img src='{$imgpath}{$row->img}'>
-                                    <div class='infos'>
-                                        <p class='name'>{$row->name}</p>
+                    ?>
+                        <div class='card'>
+                            <img src='<?= $imgpath . $row->img ?>'>
+                            <div class='infos'>
+                                <p class='name'><?= $row->name ?></p>
 
-                                        <div class='location'>
-                                            <i class='fa fa-map-marker'></i>
-                                            <p>{$row->start_city}, {$row->start_cap}</p>
-                                        </div>
-
-                                        <div class='location'>
-                                            <i class='fa fa-angle-double-right'></i>
-                                            <p>{$row->destination}</p>
-                                        </div>
-                                        <div class='buttons'>
-                                            <button 
-                                                class='delete'
-                                                onclick='openDeleteModal(this)'
-
-                                                data-id='{$row->id}'
-                                            >
-                                                <img src='assets/images/ui/delete.svg'>
-                                            </button>
-                                            <button 
-                                                class='edit' 
-                                                onclick='openEditModal(this)'
-
-                                                data-id='{$row->id}' 
-                                                data-name='{$row->name}' 
-                                                data-img='{$imgpath}{$row->img}'
-                                                data-start_city='{$row->start_city}'
-                                                data-start_cap='{$row->start_cap}'
-                                                data-destination='{$row->destination}'
-                                            >
-                                                <img src='assets/images/ui/edit.svg'>
-                                            </button>
-                                        </div>
-                                    </div>
+                                <div class='location'>
+                                    <i class='fa fa-map-marker'></i>
+                                    <p><?= $row->start_city . ", " . $row->start_cap ?></p>
                                 </div>
-                            ";
+
+                                <div class='location'>
+                                    <i class='fa fa-angle-double-right'></i>
+                                    <p><?= $row->destination ?></p>
+                                </div>
+                                <div class='buttons'>
+                                    <button 
+                                        class='delete'
+                                        onclick='openDeleteModal(this)'
+
+                                        data-id='<?= $row->id ?>'
+                                    >
+                                        <img src='assets/images/ui/delete.svg'>
+                                    </button>
+                                    <button 
+                                        class='edit' 
+                                        onclick='openEditModal(this)'
+
+                                        data-id='<?= $row->id ?>' 
+                                        data-name='<?= $row->name ?>' 
+                                        data-img='<?= $imgpath . $row->img ?>'
+                                        data-start_city='<?= $row->start_city ?>'
+                                        data-start_cap='<?= $row->start_cap ?>'
+                                        data-destination='<?= $row->destination ?>'
+                                    >
+                                        <img src='assets/images/ui/edit.svg'>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
                         }
                     ?>        
 

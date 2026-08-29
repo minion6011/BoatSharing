@@ -76,12 +76,12 @@
                                 if ($row) {
                                     $passwordFetch = $row -> password;
                                     if (!password_verify($password, $passwordFetch)) {
-                                        header("Location: " . "login.php?error=password");
+                                        header("Location: login.php?error=password");
                                         exit;
                                     }
                                     $id = $row -> id;
                                 } else {
-                                    header("Location: " . "login.php?error=notfound");
+                                    header("Location: login.php?error=notfound");
                                     exit;
                                 }
 
@@ -98,7 +98,7 @@
                                     $id = $conn -> lastInsertId();
                                 } catch(PDOException $e) {
                                     //echo $sql . "<br>" . $e->getMessage();
-                                    header("Location: " . "login.php?error=exist");
+                                    header("Location: login.php?error=exist");
                                     exit;
                                 }
                                 break;
