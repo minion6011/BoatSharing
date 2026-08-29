@@ -113,7 +113,7 @@
                     <li><b>Crea un account:</b> Registrati gratuitamente per entrare nella community di BoatSharing.</li>
                     <li><b>Metti a disposizione o cerca una barca:</b> Se sei un proprietario, puoi aggiungere la tua barca specificando itinerario e posti disponibili. Se sei un passeggero, puoi cercare l'imbarcazione perfetta per te.</li>
                     <li><b>Apri una chat:</b> Grazie al nostro sistema di messaggistica interno, gli utenti possono aprire una chat diretta con il proprietario della barca.</li>
-                    <li><b>Mettiti d'accordo:</b> Tramite la chat, organizzerete i dettagli della partenza, l'itinerario e come dividere le spese del carburante, in totale autonomia.</li>
+                    <li><b>Accordati:</b> Tramite la chat, organizzerete i dettagli della partenza, l'itinerario e come dividere le spese del carburante, in totale autonomia.</li>
                 </ol>
             </section>
 
