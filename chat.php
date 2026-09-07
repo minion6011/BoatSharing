@@ -223,7 +223,7 @@
             <form class="input" action="chat.php" method="POST">
                 <input type="hidden" name="_method" value="PUT">
 
-                <input type="text" placeholder="Invia un messaggio in chat..." name="content">
+                <input type="text" placeholder="Invia un messaggio in chat..." name="content" id="msg-input">
                 <input type='hidden' name='chatid' value=<?= $_GET['id'] ?>>
                 <button type="submit">
                     <i class="fa fa-paper-plane"></i>
